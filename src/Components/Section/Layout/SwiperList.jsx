@@ -14,9 +14,7 @@ export const SwiperList = () => {
                 {/*<!-- Grid -->*/}
                 <div className="grid lg:grid-cols-4 lg:gap-y-16 gap-10">
                     <SimpleCard/>
-                    <SimpleCard/>
-                    <SimpleCard/>
-                    <SimpleCard/>
+
                 </div>
                 {/*<!-- End Grid -->*/}
             </div>

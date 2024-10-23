@@ -1,6 +1,10 @@
 import {ListCard} from "../Cards/ListCard";
+import {useSelector} from "react-redux";
+import {selectItems} from "../../../Features/Item/item.slice.js";
 
 export const GridList = () => {
+    const items = useSelector(selectItems)
+
     return (
         <>
             {/*<!-- Card Blog -->*/}
@@ -13,10 +17,11 @@ export const GridList = () => {
                 {/*<!-- End Title -->*/}
                 {/*<!-- Grid -->*/}
                 <div className="grid lg:grid-cols-2 lg:gap-y-16 gap-10">
-                    <ListCard/>
-                    <ListCard/>
-                    <ListCard/>
-                    <ListCard/>
+                    {
+                        items.map((item) => (
+                            <ListCard key={item.id} item={item}/>
+                        ))
+                    }
                 </div>
                 {/*<!-- End Grid -->*/}
             </div>

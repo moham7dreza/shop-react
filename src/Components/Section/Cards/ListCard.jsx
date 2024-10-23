@@ -1,4 +1,4 @@
-export const ListCard = () => {
+export const ListCard = ({item}) => {
     return (
         <>
             {/*<!-- Card -->*/}
