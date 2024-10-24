@@ -1,14 +1,17 @@
+import {Link} from "react-router-dom";
+
 export const Header = () => {
     return (
         <>
             {/*<!-- ========== HEADER ========== -->*/}
             <header
-                className="flex flex-wrap md:justify-start md:flex-nowrap z-50 w-full bg-white text-sm py-3 md:py-0 dark:bg-gray-800">
+                className="flex flex-wrap md:justify-start md:flex-nowrap z-50 w-full bg-white text-sm py-3 md:py-0 dark:bg-gray-900">
                 <nav className="max-w-[85rem] w-full mx-auto px-4 md:px-6 lg:px-8" aria-label="Global">
                     <div className="relative md:flex md:items-center md:justify-between">
                         <div className="flex items-center justify-between">
-                            <a className="flex-none text-xl font-semibold dark:text-white dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-                               href="#" aria-label="Brand">تاپ ریت</a>
+                            <Link to={'/'}
+                                  className="flex-none text-xl font-semibold dark:text-white dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                                  aria-label="Brand">تاپ ریت</Link>
                             <div className="md:hidden">
                                 <button type="button"
                                         className="hs-collapse-toggle flex justify-center items-center w-9 h-9 text-sm font-semibold rounded-lg border border-gray-200 text-gray-800 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"

@@ -1,6 +1,11 @@
 import {SimpleCard} from "../Cards/SimpleCard";
+import {useSelector} from "react-redux";
+import {selectItems} from "../../../Features/Item/item.slice.js";
 
 export const SwiperList = () => {
+    const items = useSelector(selectItems)
+    const count = items.length
+
     return (
         <>
             {/*<!-- Card Blog -->*/}
@@ -13,8 +18,11 @@ export const SwiperList = () => {
                 {/*<!-- End Title -->*/}
                 {/*<!-- Grid -->*/}
                 <div className="grid lg:grid-cols-4 lg:gap-y-16 gap-10">
-                    <SimpleCard/>
-
+                    {
+                        items.map((item) => (
+                            <SimpleCard key={item.id} item={item}/>
+                        ))
+                    }
                 </div>
                 {/*<!-- End Grid -->*/}
             </div>
