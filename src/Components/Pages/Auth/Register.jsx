@@ -2,7 +2,6 @@ import {Link, useNavigate} from "react-router-dom";
 import {useState} from "react";
 import {useDispatch} from "react-redux";
 import {userWasRegistered} from "../../../Features/User/user.slice.js";
-import {nanoid} from "@reduxjs/toolkit";
 
 export const Register = () => {
 
@@ -20,12 +19,8 @@ export const Register = () => {
     const onTermsChanged = (e) => setTerms(e.target.value)
     const handleFormSubmit = () => {
         if (email && pass && confirmPass && terms && pass === confirmPass) {
-            const payload = {
-                id: nanoid(),
-                email: email,
-                pass: pass,
-            }
-            dispatch(userWasRegistered(payload))
+
+            dispatch(userWasRegistered(email, pass))
 
             setTerms(0)
             setPass('')

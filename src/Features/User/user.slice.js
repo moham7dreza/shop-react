@@ -1,4 +1,4 @@
-import {createSlice} from "@reduxjs/toolkit";
+import {createSlice, nanoid} from "@reduxjs/toolkit";
 
 const userSlice = createSlice({
     name: "users",
@@ -12,6 +12,15 @@ const userSlice = createSlice({
         userWasRegistered: {
             reducer(state, action) {
                 state.list.push(action.payload)
+            },
+            prepare(email, password) {
+                return {
+                    payload: {
+                        id: nanoid(),
+                        email: email,
+                        password: password,
+                    }
+                }
             }
         },
     }
