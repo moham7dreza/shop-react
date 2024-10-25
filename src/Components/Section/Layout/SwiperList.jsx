@@ -4,7 +4,8 @@ import {selectItems} from "../../../Features/Item/item.slice.js";
 
 export const SwiperList = () => {
     const items = useSelector(selectItems)
-    const count = items.length
+
+    const sortedItems = items.slice().sort((a, b) => b.created_at.localeCompare(a.created_at))
 
     return (
         <>
@@ -19,7 +20,7 @@ export const SwiperList = () => {
                 {/*<!-- Grid -->*/}
                 <div className="grid lg:grid-cols-4 lg:gap-y-16 gap-10">
                     {
-                        items.map((item) => (
+                        sortedItems.map((item) => (
                             <SimpleCard key={item.id} item={item}/>
                         ))
                     }

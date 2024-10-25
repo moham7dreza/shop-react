@@ -5,6 +5,8 @@ import {selectItems} from "../../../Features/Item/item.slice.js";
 export const GridList = () => {
     const items = useSelector(selectItems)
 
+    const sortedItems = items.slice().sort((a, b) => b.created_at.localeCompare(a.created_at))
+
     return (
         <>
             {/*<!-- Card Blog -->*/}
@@ -18,7 +20,7 @@ export const GridList = () => {
                 {/*<!-- Grid -->*/}
                 <div className="grid lg:grid-cols-2 lg:gap-y-16 gap-10">
                     {
-                        items.map((item) => (
+                        sortedItems.map((item) => (
                             <ListCard key={item.id} item={item}/>
                         ))
                     }

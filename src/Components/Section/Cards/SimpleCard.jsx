@@ -1,4 +1,5 @@
 import {Link} from "react-router-dom";
+import {ShowTime} from "../../Partials/ShowTime.jsx";
 
 export const SimpleCard = ({item}) => {
     return (
@@ -26,6 +27,9 @@ export const SimpleCard = ({item}) => {
                     <div>
                         <h5 className="text-sm text-gray-800 dark:text-gray-200">تست</h5>
                     </div>
+                </div>
+                <div className='mt-3 text-gray-600 dark:text-gray-400 text-left'>
+                    <ShowTime timestamp={item.created_at}/>
                 </div>
             </Link>
             {/*<!-- End Card -->*/
