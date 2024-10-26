@@ -1,4 +1,5 @@
-import {createSlice} from "@reduxjs/toolkit";
+import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
+import ItemApiService from "../../Services/Item/ItemApiService.js";
 
 const itemSlice = createSlice({
     name: 'items',
@@ -41,3 +42,5 @@ export const {
 } = itemSlice.actions
 
 export default itemSlice.reducer
+
+export const fetchItems = createAsyncThunk('items/fetchItems', () => ItemApiService.getItems())

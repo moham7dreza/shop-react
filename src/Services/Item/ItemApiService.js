@@ -11,7 +11,7 @@ class ItemApiService {
     // Create
     static async createItem(data) {
         try {
-            const response = await axios.post(self.getFullUrl('items'), data);
+            const response = await axios.post(this.getFullUrl('items'), data);
             return response.data;
         } catch (error) {
             throw error;
@@ -21,7 +21,7 @@ class ItemApiService {
     // Read
     static async getItems() {
         try {
-            const response = await axios.get(self.getFullUrl('items/index'));
+            const response = await axios.get(this.getFullUrl('items/index'));
             return response.data;
         } catch (error) {
             throw error;
@@ -30,7 +30,7 @@ class ItemApiService {
 
     static async getItemById(itemId) {
         try {
-            const response = await axios.get(self.getFullUrl(`items/${itemId}`));
+            const response = await axios.get(this.getFullUrl(`items/${itemId}`));
             return response.data;
         } catch (error) {
             throw error;
@@ -40,7 +40,7 @@ class ItemApiService {
     // Update
     static async updateItem(itemId, data) {
         try {
-            const response = await axios.put(self.getFullUrl(`items/${itemId}`), data);
+            const response = await axios.put(this.getFullUrl(`items/${itemId}`), data);
             return response.data;
         } catch (error) {
             throw error;
@@ -50,7 +50,7 @@ class ItemApiService {
     // Delete
     static async deleteItem(itemId) {
         try {
-            const response = await axios.delete(self.getFullUrl(`items/${itemId}`));
+            const response = await axios.delete(this.getFullUrl(`items/${itemId}`));
             return response.data;
         } catch (error) {
             throw error;

@@ -5,7 +5,6 @@ import {reactionUpdated} from "../../../Features/Item/item.slice.js";
 export const Reactions = ({item}) => {
     const dispatch = useDispatch()
 
-    console.log(Object.entries(reactionEmojis))
     return (
         <>
             <div className='m-4 text-left text-slate-900 dark:text-white text-opacity-55'>

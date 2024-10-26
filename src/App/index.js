@@ -1,5 +1,5 @@
 import {configureStore} from "@reduxjs/toolkit";
-import itemReducer from "../Features/Item/item.slice.js"
+import itemReducer, {fetchItems} from "../Features/Item/item.slice.js"
 import userReducer from "../Features/User/user.slice.js"
 
 export const store = configureStore({
@@ -8,3 +8,5 @@ export const store = configureStore({
         users: userReducer,
     }
 })
+
+store.dispatch(fetchItems())
