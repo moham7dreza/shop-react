@@ -13,18 +13,18 @@ export const ListCard = ({item}) => {
                         <div className="flex-shrink-0 relative rounded-xl overflow-hidden w-full sm:w-56 h-44">
                             <img
                                 className="group-hover:scale-105 transition-transform duration-500 ease-in-out w-full h-full absolute top-0 start-0 object-cover rounded-xl"
-                                src="https://images.unsplash.com/photo-1540575861501-7cf05a4b125a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80"
+                                src={item.image ?? item.image[0]}
                                 alt="Image Description"/>
                         </div>
                         <div className="grow mt-4 sm:mt-0 sm:ms-6 px-4 sm:px-0">
                             <h3 className="text-xl font-semibold text-gray-800 group-hover:text-gray-600 dark:text-gray-300 dark:group-hover:text-white">
-                                {item.title}
+                                {item.name}
                             </h3>
                             <p className="mt-3 text-gray-600 dark:text-gray-400">
-                                {item.body}
+                                {item.display_name}
                             </p>
                             <div className='mt-3 text-gray-600 dark:text-gray-400'>
-                                <ShowTime timestamp={item.created_at}/>
+                                <ShowTime timestamp={item.release_at}/>
                             </div>
                         </div>
                     </div>

@@ -7,10 +7,11 @@ export const Show = () => {
     const {id} = useParams()
 
     const item = useSelector(state => selectItem(state, id))
-
+    console.log(item)
     if (!item) {
         return <E404/>
     }
+
     return (<>
         {/*<!-- Blog Article -->*/}
         <div className="max-w-[85rem] px-4 sm:px-6 lg:px-8 mx-auto">
@@ -31,25 +32,22 @@ export const Show = () => {
                             </Link>
 
                             <h2 className="text-3xl font-bold lg:text-5xl dark:text-white">
-                                {item.title}
+                                {item.name}
                             </h2>
 
                             <div className="flex items-center gap-x-5">
                                 <a className="inline-flex items-center gap-1.5 py-1 px-3 sm:py-2 sm:px-4 rounded-full text-xs sm:text-sm bg-gray-100 text-gray-800 hover:bg-gray-200 focus:outline-none focus:bg-gray-200 dark:bg-neutral-800 dark:text-neutral-200 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800"
                                    href="#">
-                                    Company News
+                                    {item.category.name}
                                 </a>
                                 <p className="text-xs sm:text-sm text-gray-800 dark:text-neutral-200">January 18,
-                                    2023</p>
+                                    {item.brand.name}
+                                </p>
                             </div>
-
-                            <p className="text-lg text-gray-800 dark:text-neutral-200">
-                                {item.body}
-                            </p>
 
                             <figure>
                                 <img className="w-full object-cover rounded-xl"
-                                     src={item.image}
+                                     src={item.image ?? item.image[0]}
                                      alt=""/>
                                 <figcaption
                                     className="mt-3 text-sm text-center text-gray-500 dark:text-neutral-500">
@@ -57,27 +55,27 @@ export const Show = () => {
                                 </figcaption>
                             </figure>
 
+                            <p className="text-lg text-gray-800 dark:text-neutral-200">
+                                {item.intro}
+                            </p>
+                            <p className="text-lg text-gray-800 dark:text-neutral-200">
+                                {item.description}
+                            </p>
+
                             <div
                                 className="flex flex-col lg:flex-row lg:justify-between lg:items-center gap-y-5 lg:gap-y-0">
                                 {/*<!-- Badges/Tags -->*/}
                                 <div>
-                                    <a className="m-0.5 inline-flex items-center gap-1.5 py-2 px-3 rounded-full text-sm bg-gray-100 text-gray-800 hover:bg-gray-200 focus:outline-none focus:bg-gray-200 dark:bg-neutral-800 dark:text-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700"
-                                       href="#">
-                                        Plan
-                                    </a>
-                                    <a className="m-0.5 inline-flex items-center gap-1.5 py-2 px-3 rounded-full text-sm bg-gray-100 text-gray-800 hover:bg-gray-200 focus:outline-none focus:bg-gray-200 dark:bg-neutral-800 dark:text-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700"
-                                       href="#">
-                                        Web development
-                                    </a>
-                                    <a className="m-0.5 inline-flex items-center gap-1.5 py-2 px-3 rounded-full text-sm bg-gray-100 text-gray-800 hover:bg-gray-200 focus:outline-none focus:bg-gray-200 dark:bg-neutral-800 dark:text-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700"
-                                       href="#">
-                                        Free
-                                    </a>
-                                    <a className="m-0.5 inline-flex items-center gap-1.5 py-2 px-3 rounded-full text-sm bg-gray-100 text-gray-800 hover:bg-gray-200 focus:outline-none focus:bg-gray-200 dark:bg-neutral-800 dark:text-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700"
-                                       href="#">
-                                        Team
-                                    </a>
+                                    {
+                                        item.tags.data.map(tag => (
+                                            <Link to={'/'} key={tag.id}
+                                                  className="m-0.5 inline-flex items-center gap-1.5 py-1 px-3 rounded-full text-xs sm:text-sm bg-gray-100 text-gray-800 hover:bg-gray-200 focus:outline-none focus:bg-gray-200 dark:bg-neutral-800 dark:text-neutral-200 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700">
+                                                {tag.name}
+                                            </Link>
+                                        ))
+                                    }
                                 </div>
+
                                 {/*<!-- End Badges/Tags -->*/}
 
                                 <div className="flex justify-end items-center gap-x-1.5">
@@ -92,7 +90,7 @@ export const Show = () => {
                                                 <path
                                                     d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
                                             </svg>
-                                            875
+                                            {item.reactions_count}
                                             <span
                                                 className="hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible opacity-0 transition-opacity inline-block absolute invisible z-10 py-1 px-2 bg-gray-900 text-xs font-medium text-white rounded shadow-sm dark:bg-black"
                                                 role="tooltip">
@@ -115,7 +113,7 @@ export const Show = () => {
                                                  strokeLinejoin="round">
                                                 <path d="m3 21 1.9-5.7a8.5 8.5 0 1 1 3.8 3.8z"/>
                                             </svg>
-                                            16
+                                            {item.comments_count}
                                             <span
                                                 className="hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible opacity-0 transition-opacity inline-block absolute invisible z-10 py-1 px-2 bg-gray-900 text-xs font-medium text-white rounded shadow-sm dark:bg-black"
                                                 role="tooltip">
@@ -141,7 +139,7 @@ export const Show = () => {
                                                 <polyline points="16 6 12 2 8 6"/>
                                                 <line x1="12" x2="12" y1="2" y2="15"/>
                                             </svg>
-                                            Share
+                                            به اشتراک بزار
                                         </button>
                                         <div
                                             className="hs-dropdown-menu w-56 transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden mb-1 z-10 bg-gray-900 shadow-md rounded-xl p-2 dark:bg-black"
@@ -208,16 +206,16 @@ export const Show = () => {
                             className="group flex items-center gap-x-3 border-b border-gray-200 pb-8 mb-8 dark:border-neutral-700">
                             <a className="block shrink-0 focus:outline-none" href="#">
                                 <img className="size-10 rounded-full"
-                                     src={item.user_image}
+                                     src={item.user.profile}
                                      alt="Avatar"/>
                             </a>
 
                             <a className="group grow block focus:outline-none" href="">
                                 <h5 className="group-hover:text-gray-600 group-focus:text-gray-600 text-sm font-semibold text-gray-800 dark:group-hover:text-neutral-400 dark:group-focus:text-neutral-400 dark:text-neutral-200">
-                                    {item.user}
+                                    {item.user.name}
                                 </h5>
                                 <p className="text-sm text-gray-500 dark:text-neutral-500">
-                                    UI/UX enthusiast
+                                    {item.user.bio}
                                 </p>
                             </a>
 
@@ -259,39 +257,7 @@ export const Show = () => {
                             </a>
                             {/*<!-- End Media -->*/}
 
-                            {/*<!-- Media -->*/}
-                            <a className="group flex items-center gap-x-6 focus:outline-none" href="#">
-                                <div className="grow">
-              <span
-                  className="text-sm font-bold text-gray-800 group-hover:text-blue-600 group-focus:text-blue-600 dark:text-neutral-200 dark:group-hover:text-blue-500 dark:group-focus:text-blue-500">
-                If your UX Portfolio has this 20% Well Done, it Will Give You an 80% Result
-              </span>
-                                </div>
 
-                                <div className="shrink-0 relative rounded-lg overflow-hidden size-20">
-                                    <img className="size-full absolute top-0 start-0 object-cover rounded-lg"
-                                         src="https://images.unsplash.com/photo-1542125387-c71274d94f0a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=320&q=80"
-                                         alt="Blog Image"/>
-                                </div>
-                            </a>
-                            {/*<!-- End Media -->*/}
-
-                            {/*<!-- Media -->*/}
-                            <a className="group flex items-center gap-x-6 focus:outline-none" href="#">
-                                <div className="grow">
-              <span
-                  className="text-sm font-bold text-gray-800 group-hover:text-blue-600 group-focus:text-blue-600 dark:text-neutral-200 dark:group-hover:text-blue-500 dark:group-focus:text-blue-500">
-                7 Principles of Icon Design
-              </span>
-                                </div>
-
-                                <div className="shrink-0 relative rounded-lg overflow-hidden size-20">
-                                    <img className="size-full absolute top-0 start-0 object-cover rounded-lg"
-                                         src="https://images.unsplash.com/photo-1586232702178-f044c5f4d4b7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=320&q=80"
-                                         alt="Blog Image"/>
-                                </div>
-                            </a>
-                            {/*<!-- End Media -->*/}
                         </div>
                     </div>
                 </div>

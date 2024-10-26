@@ -13,7 +13,7 @@ export const Reactions = ({item}) => {
                         return (
                             <button
                                 onClick={() => dispatch(reactionUpdated({id: item.id, reaction: name}))}
-                                key={name} type="button" className="mx-1 text-2xl">
+                                key={name} type="button" className="mx-1">
                                 {emoji} {item.reactions[name]}
                             </button>
                         )

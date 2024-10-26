@@ -4,7 +4,8 @@ import {selectItems} from "../../../Features/Item/item.slice.js";
 
 export const SwiperList = () => {
     const items = useSelector(selectItems)
-
+    console.log('list')
+    console.log(items)
     const sortedItems = items.slice().sort((a, b) => b.created_at.localeCompare(a.created_at))
 
     return (
