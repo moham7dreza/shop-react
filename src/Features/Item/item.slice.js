@@ -34,6 +34,8 @@ const itemSlice = createSlice({
 
 export const selectItems = state => state.items.list
 export const selectItem = (state, id) => state.items.list.find(item => item.id === Number(id))
+export const selectStatus = state => state.items.status
+export const selectError = state => state.items.error
 
 export const {
     reactionUpdated
