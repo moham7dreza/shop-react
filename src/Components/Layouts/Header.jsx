@@ -93,7 +93,7 @@ export const Header = () => {
                                                     <a className="group mt-2 p-3 flex gap-x-5 items-center rounded-xl hover:bg-gray-100 dark:hover:bg-slate-500/10 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-slate-600"
                                                        href="#">
                                                         <img className="w-32 h-32 rounded-lg"
-                                                             src="https://images.unsplash.com/photo-1648737967328-690548aec14f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=320&h=320&q=80"
+                                                             src=""
                                                              alt="Image Description"/>
                                                         <div className="grow">
                                                             <p className="text-sm text-gray-800 dark:text-slate-400">
