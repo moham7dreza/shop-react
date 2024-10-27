@@ -1,4 +1,3 @@
-import '../../App.css'
 import logo from '../../Assets/logo.svg';
 
 export const Spinner = ({text, size}) => {
