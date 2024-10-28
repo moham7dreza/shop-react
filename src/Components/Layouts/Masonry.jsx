@@ -1,6 +1,7 @@
 import {useSelector} from "react-redux";
 import {selectBanners} from "../../Features/Banner/banner.slice.js";
 import {Link} from "react-router-dom";
+import {isEmptyArray} from "formik";
 
 export const Masonry = () => {
     const banners = useSelector(selectBanners)
@@ -19,13 +20,13 @@ export const Masonry = () => {
                             <div className="aspect-w-12 aspect-h-7 sm:aspect-none rounded-xl overflow-hidden">
                                 <img
                                     className="group-hover:scale-105 transition-transform duration-500 ease-in-out rounded-xl w-full object-cover"
-                                    src={banners[0].image ?? ''}
+                                    src={!isEmptyArray(banners) ? banners[0].image : ''}
                                     alt="Image Description"/>
                             </div>
                             <div className="absolute bottom-0 start-0 end-0 p-2 sm:p-4">
                                 <div
                                     className="text-sm font-bold text-gray-800 rounded-lg bg-white p-4 md:text-xl dark:bg-gray-800 dark:text-gray-200">
-                                    {banners[0].title ?? ''}
+                                    {!isEmptyArray(banners) ? banners[0].title : ''}
                                 </div>
                             </div>
                         </Link>
@@ -40,13 +41,13 @@ export const Masonry = () => {
                             <div className="aspect-w-12 aspect-h-7 sm:aspect-none rounded-xl overflow-hidden">
                                 <img
                                     className="group-hover:scale-105 transition-transform duration-500 ease-in-out rounded-xl w-full object-cover"
-                                    src={banners[1].image ?? ''}
+                                    src={!isEmptyArray(banners) ? banners[1].image : ''}
                                     alt="Image Description"/>
                             </div>
                             <div className="absolute bottom-0 start-0 end-0 p-2 sm:p-4">
                                 <div
                                     className="text-sm font-bold text-gray-800 rounded-lg bg-white p-4 md:text-xl dark:bg-gray-800 dark:text-gray-200">
-                                    {banners[1].title ?? ''}
+                                    {!isEmptyArray(banners) ? banners[1].title : ''}
                                 </div>
                             </div>
                         </Link>
@@ -61,13 +62,13 @@ export const Masonry = () => {
                             <div className="aspect-w-12 aspect-h-7 sm:aspect-none rounded-xl overflow-hidden">
                                 <img
                                     className="group-hover:scale-105 transition-transform duration-500 ease-in-out rounded-xl w-full object-cover"
-                                    src={banners[2].image ?? ''}
+                                    src={!isEmptyArray(banners) ? banners[2].image : ''}
                                     alt="Image Description"/>
                             </div>
                             <div className="absolute bottom-0 start-0 end-0 p-2 sm:p-4">
                                 <div
                                     className="text-sm font-bold text-gray-800 rounded-lg bg-white p-4 md:text-xl dark:bg-gray-800 dark:text-gray-200">
-                                    {banners[2].title ?? ''}
+                                    {!isEmptyArray(banners) ? banners[2].title : ''}
                                 </div>
                             </div>
                         </Link>
@@ -82,13 +83,13 @@ export const Masonry = () => {
                             <div className="aspect-w-12 aspect-h-7 sm:aspect-none rounded-xl overflow-hidden">
                                 <img
                                     className="group-hover:scale-105 transition-transform duration-500 ease-in-out rounded-xl w-full object-cover"
-                                    src={banners[3].image ?? ''}
+                                    src={!isEmptyArray(banners) ? banners[3].image : ''}
                                     alt="Image Description"/>
                             </div>
                             <div className="absolute bottom-0 start-0 end-0 p-2 sm:p-4">
                                 <div
                                     className="text-sm font-bold text-gray-800 rounded-lg bg-white p-4 md:text-xl dark:bg-gray-800 dark:text-gray-200">
-                                    {banners[3].title ?? ''}
+                                    {!isEmptyArray(banners) ? banners[3].title : ''}
                                 </div>
                             </div>
                         </Link>
@@ -103,13 +104,13 @@ export const Masonry = () => {
                             <div className="aspect-w-12 aspect-h-7 sm:aspect-none rounded-xl overflow-hidden">
                                 <img
                                     className="group-hover:scale-105 transition-transform duration-500 ease-in-out rounded-xl w-full object-cover"
-                                    src={banners[4].image ?? ''}
+                                    src={!isEmptyArray(banners) ? banners[4].image : ''}
                                     alt="Image Description"/>
                             </div>
                             <div className="absolute bottom-0 start-0 end-0 p-2 sm:p-4">
                                 <div
                                     className="text-sm font-bold text-gray-800 rounded-lg bg-white p-4 md:text-xl dark:bg-gray-800 dark:text-gray-200">
-                                    {banners[4].title ?? ''}
+                                    {!isEmptyArray(banners) ? banners[4].title : ''}
                                 </div>
                             </div>
                         </Link>

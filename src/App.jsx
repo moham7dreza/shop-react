@@ -49,7 +49,7 @@ function App() {
 
     let bannerContent
 
-    switch (itemStatus) {
+    switch (bannerStatus) {
         case 'pending':
             bannerContent = <Spinner/>
             break
