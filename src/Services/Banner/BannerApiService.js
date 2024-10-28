@@ -5,7 +5,7 @@ class BannerApiService {
     static API_BASE_URL = config.apiUrl;
 
     static getFullUrl(endpoint) {
-        return `${BannerApiService.API_BASE_URL}/${endpoint}`;
+        return `${this.API_BASE_URL}/${endpoint}`;
     }
 
     // Create

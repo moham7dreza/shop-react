@@ -1,7 +1,7 @@
 import axios from 'axios';
 import config from "../../Config/app.js";
 
-class ItemApiService {
+class CategoryApiService {
     static API_BASE_URL = config.apiUrl;
 
     static getFullUrl(endpoint) {
@@ -9,9 +9,9 @@ class ItemApiService {
     }
 
     // Create
-    static async createItem(data) {
+    static async createCategory(data) {
         try {
-            const response = await axios.post(this.getFullUrl('items'), data);
+            const response = await axios.post(this.getFullUrl('items/categories'), data);
             return response.data;
         } catch (error) {
             throw error;
@@ -19,18 +19,18 @@ class ItemApiService {
     }
 
     // Read
-    static async getItems() {
+    static async getCategories() {
         try {
-            const response = await axios.get(this.getFullUrl('items/index'));
+            const response = await axios.get(this.getFullUrl('items/categories/index'));
             return response.data;
         } catch (error) {
             throw error;
         }
     }
 
-    static async getItemById(itemId) {
+    static async getCategoryById(categoryId) {
         try {
-            const response = await axios.get(this.getFullUrl(`items/${itemId}`));
+            const response = await axios.get(this.getFullUrl(`items/categories/${categoryId}`));
             return response.data;
         } catch (error) {
             throw error;
@@ -38,9 +38,9 @@ class ItemApiService {
     }
 
     // Update
-    static async updateItem(itemId, data) {
+    static async updateCategory(categoryId, data) {
         try {
-            const response = await axios.put(this.getFullUrl(`items/${itemId}`), data);
+            const response = await axios.put(this.getFullUrl(`items/categories/${categoryId}`), data);
             return response.data;
         } catch (error) {
             throw error;
@@ -48,9 +48,9 @@ class ItemApiService {
     }
 
     // Delete
-    static async deleteItem(itemId) {
+    static async deleteCategory(categoryId) {
         try {
-            const response = await axios.delete(this.getFullUrl(`items/${itemId}`));
+            const response = await axios.delete(this.getFullUrl(`items/categories/${categoryId}`));
             return response.data;
         } catch (error) {
             throw error;
@@ -58,4 +58,4 @@ class ItemApiService {
     }
 }
 
-export default ItemApiService;
+export default CategoryApiService;
