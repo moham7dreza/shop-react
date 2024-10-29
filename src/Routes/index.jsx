@@ -1,7 +1,8 @@
 import {createBrowserRouter} from "react-router-dom";
 import App from "../App.jsx";
 import MainLayout from "../Components/Layouts/MainLayout.jsx";
-import {Show} from "../Components/Item/Pages/Show.jsx";
+import {Show as ItemShow} from "../Components/Item/Pages/Show.jsx";
+import {Show as ShopShow} from "../Components/Shop/Pages/Show.jsx";
 import {E404} from "../Components/Error/E404.jsx";
 import {Login} from "../Components/Pages/Auth/Login.jsx";
 import {Register} from "../Components/Pages/Auth/Register.jsx";
@@ -36,7 +37,11 @@ export const router = createBrowserRouter([
             },
             {
                 path: 'items/:id',
-                element: <Show/>
+                element: <ItemShow/>
+            },
+            {
+                path: 'shops/:id',
+                element: <ShopShow/>
             },
         ]
     }

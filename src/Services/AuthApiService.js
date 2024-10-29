@@ -52,6 +52,15 @@ class AuthApiService {
             throw error;
         }
     }
+
+    static async logout(data) {
+        try {
+            const response = await axios.post(this.getFullUrl('auth-plus/logout'), data);
+            return response.data;
+        } catch (error) {
+            throw error;
+        }
+    }
 }
 
 export default AuthApiService;

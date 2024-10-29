@@ -1,14 +1,14 @@
 import {Link, useParams} from "react-router-dom";
 import {useSelector} from "react-redux";
-import {selectItem} from "../../../Features/Item/item.slice.js";
 import {E404} from "../../Error/E404.jsx";
+import {selectShop} from "../../../Features/Shop/shop.slice.js";
 
 export const Show = () => {
     const {id} = useParams()
 
-    const item = useSelector(state => selectItem(state, id))
+    const shop = useSelector(state => selectShop(state, id))
 
-    if (!item) {
+    if (!shop) {
         return <E404/>
     }
     return (<>

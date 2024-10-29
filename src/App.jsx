@@ -10,72 +10,42 @@ import {Spinner} from "./Components/Partials/Spinner.jsx";
 import {E404} from "./Components/Error/E404.jsx";
 
 function App() {
-
-    const dispatch = useDispatch()
-
-    const itemStatus = useSelector(selectItemStatus)
-    const itemError = useSelector(selectItemError)
-
-    const bannerStatus = useSelector(selectBannerStatus)
-    const bannerError = useSelector(selectBannerError)
+    const dispatch = useDispatch();
+    const itemStatus = useSelector(selectItemStatus);
+    const itemError = useSelector(selectItemError);
+    const bannerStatus = useSelector(selectBannerStatus);
+    const bannerError = useSelector(selectBannerError);
 
     useEffect(() => {
-        if (itemStatus === 'idle') {
-            dispatch(fetchItems())
+        if (itemStatus === 'idle') dispatch(fetchItems());
+        if (bannerStatus === 'idle') dispatch(fetchBanners());
+    }, [itemStatus, bannerStatus, dispatch]);
+
+    const renderContent = (status, error, Component) => {
+        switch (status) {
+            case 'pending':
+                return <Spinner/>;
+            case 'completed':
+                return <Component/>;
+            case 'failed':
+                return <div>{error}</div>;
+            default:
+                return <E404/>;
         }
-        if (bannerStatus === 'idle') {
-            dispatch(fetchBanners())
-        }
-    }, [itemStatus, bannerStatus]);
-
-    let itemContent
-
-    switch (itemStatus) {
-        case 'pending':
-            itemContent = <Spinner/>
-            break
-        case 'completed':
-            itemContent = <div>
-                <SwiperList/>
-                <GridList/>
-            </div>
-            break
-        case 'failed':
-            itemContent = <div>{itemError}</div>
-            break
-        default:
-            itemContent = <E404/>
-    }
-
-    let bannerContent
-
-    switch (bannerStatus) {
-        case 'pending':
-            bannerContent = <Spinner/>
-            break
-        case 'completed':
-            bannerContent = <div>
-                <Masonry/>
-            </div>
-            break
-        case 'failed':
-            bannerContent = <div>{bannerError}</div>
-            break
-        default:
-            bannerContent = <E404/>
-    }
+    };
 
     return (
         <>
             <Hero/>
-            {
-                bannerContent
-            }
-            {
-                itemContent
-            }
+            {renderContent(bannerStatus, bannerError, Masonry)}
+            {renderContent(itemStatus, itemError, () => (
+                <div>
+                    <SwiperList/>
+                    <GridList/>
+                </div>
+            ))}
         </>
-    )
+    );
 }
 
-export default App
+export default App;
