@@ -21,7 +21,7 @@ class ShopApiService {
     // Read
     static async getShops() {
         try {
-            const response = await axios.get(this.getFullUrl('shops/index'));
+            const response = await axios.get(this.getFullUrl('shops'));
             return response.data;
         } catch (error) {
             throw error;

@@ -21,7 +21,7 @@ class BannerApiService {
     // Read
     static async getBanners() {
         try {
-            const response = await axios.get(this.getFullUrl('banners/index'));
+            const response = await axios.get(this.getFullUrl('banners'));
             return response.data;
         } catch (error) {
             throw error;

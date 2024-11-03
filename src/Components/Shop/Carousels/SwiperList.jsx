@@ -1,11 +1,11 @@
-import {SimpleCard} from "../Cards/SimpleCard";
 import {useSelector} from "react-redux";
-import {selectItems} from "../../../Features/Item/item.slice.js";
+import {selectShops} from "../../../Features/Shop/shop.slice.js";
+import {SimpleCard} from "../Cards/SimpleCard.jsx";
 
 export const SwiperList = () => {
-    const items = useSelector(selectItems)
+    const shops = useSelector(selectShops)
 
-    const sortedItems = items.slice().sort((a, b) => b.created_at.localeCompare(a.created_at))
+    const sortedShops = shops.slice().sort((a, b) => b.created_at.localeCompare(a.created_at))
 
     return (
         <>
@@ -20,7 +20,7 @@ export const SwiperList = () => {
                 {/*<!-- Grid -->*/}
                 <div className="grid lg:grid-cols-4 lg:gap-y-16 gap-10">
                     {
-                        sortedItems.map((item) => (
+                        sortedShops.map((item) => (
                             <SimpleCard key={item.id} item={item}/>
                         ))
                     }

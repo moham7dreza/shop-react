@@ -21,7 +21,7 @@ class ItemApiService {
     // Read
     static async getItems() {
         try {
-            const response = await axios.get(this.getFullUrl('items/index'));
+            const response = await axios.get(this.getFullUrl('items'));
             return response.data;
         } catch (error) {
             throw error;
