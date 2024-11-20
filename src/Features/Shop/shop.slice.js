@@ -1,4 +1,4 @@
-import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
+import {createAsyncThunk, createSelector, createSlice} from "@reduxjs/toolkit";
 import ShopApiService from "../../Services/Shop/ShopApiService.js";
 
 export const fetchShops = createAsyncThunk('shops/fetchShops', () => ShopApiService.getShops())
@@ -27,5 +27,10 @@ export const selectShops = state => state.shops.list
 export const selectShop = (state, id) => state.shops.list.find(shop => shop.id === Number(id))
 export const selectShopStatus = state => state.shops.status
 export const selectShopError = state => state.shops.error
+// create memoized selectors for performance optimization
+export const selectShopItems = createSelector(
+    [selectShops, (_, id) => id],
+    (items, id) => items.filter(item => item.shop_id === id)
+)
 
 export default shopSlice.reducer
