@@ -1,6 +1,7 @@
 import {Link, useParams} from "react-router-dom";
 import {useSelector} from "react-redux";
-import {selectShop, selectShopItems} from "../../../Features/Shop/shop.slice.js";
+import {selectShop} from "../../../Features/Shop/shop.slice.js";
+import {selectShopItems} from "../../../Features/Item/item.slice.js";
 
 export const Items = () => {
 

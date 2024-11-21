@@ -1,30 +1,35 @@
-import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
+import {createAsyncThunk, createEntityAdapter, createSelector, createSlice} from "@reduxjs/toolkit";
 import ItemApiService from "../../Services/Item/ItemApiService.js";
+
+const itemAdapter = createEntityAdapter(
+    {
+        sortComparer: (a, b) => b.created_at.localeCompare(a.created_at)
+    }
+)
 
 export const fetchItems = createAsyncThunk('items/fetchItems', () => ItemApiService.getItems())
 
 const itemSlice = createSlice({
     name: 'items',
-    initialState: {
-        list: [],
+    initialState: itemAdapter.getInitialState({
         status: 'idle',
         error: null,
-    },
+    }),
     reducers: {
         reactionUpdated: (state, action) => {
             const {id, reaction} = action.payload
-            const item = state.list.find(item => item.id === Number(id))
+            const item = state.entities[id]
             if (item) {
                 item.reactions[reaction]++
             }
         }
     },
     extraReducers: builder => {
-        builder.addCase(fetchItems.pending, (state, action) => {
+        builder.addCase(fetchItems.pending, (state, _) => {
             state.status = 'pending'
         }).addCase(fetchItems.fulfilled, (state, action) => {
             state.status = 'completed'
-            state.list = action.payload.data
+            itemAdapter.upsertMany(state, action.payload.data)
         }).addCase(fetchItems.rejected, (state, action) => {
             state.status = 'failed'
             state.error = action.error.message
@@ -32,10 +37,20 @@ const itemSlice = createSlice({
     }
 })
 
-export const selectItems = state => state.items.list
-export const selectItem = (state, id) => state.items.list.find(item => item.id === Number(id))
+export const {
+    selectAll: selectItems,
+    selectById: selectItem,
+    selectIds: selectItemIds,
+} = itemAdapter.getSelectors(state => state.items)
+
 export const selectItemStatus = state => state.items.status
 export const selectItemError = state => state.items.error
+
+// create memoized selectors for performance optimization
+export const selectShopItems = createSelector(
+    [selectItems, (_, id) => id],
+    (items, id) => items.filter(item => item.shop_id === id)
+)
 
 export const {
     reactionUpdated

@@ -13,10 +13,13 @@ import {SwiperList as ShopSwiperList} from "./Components/Shop/Carousels/SwiperLi
 
 function App() {
     const dispatch = useDispatch();
+
     const itemStatus = useSelector(selectItemStatus);
     const itemError = useSelector(selectItemError);
+
     const bannerStatus = useSelector(selectBannerStatus);
     const bannerError = useSelector(selectBannerError);
+
     const shopStatus = useSelector(selectShopStatus);
     const shopError = useSelector(selectShopError);
 

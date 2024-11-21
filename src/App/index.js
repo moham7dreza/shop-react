@@ -3,6 +3,7 @@ import itemReducer from "../Features/Item/item.slice.js"
 import userReducer from "../Features/User/user.slice.js"
 import bannerReducer from "../Features/Banner/banner.slice.js"
 import categoryReducer from "../Features/Item/category.slice.js"
+import shopReducer from "../Features/Shop/shop.slice.js"
 
 export const store = configureStore({
     reducer: {
@@ -10,5 +11,6 @@ export const store = configureStore({
         users: userReducer,
         banners: bannerReducer,
         categories: categoryReducer,
+        shops: shopReducer,
     }
 })
