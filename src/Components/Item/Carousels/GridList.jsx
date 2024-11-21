@@ -1,4 +1,4 @@
-import {ListCard} from "../Cards/ListCard";
+import ListCard from "../Cards/ListCard.jsx";
 import {useSelector} from "react-redux";
 import {selectItems} from "../../../Features/Item/item.slice.js";
 

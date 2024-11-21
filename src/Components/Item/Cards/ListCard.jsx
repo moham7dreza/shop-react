@@ -1,8 +1,9 @@
 import {ShowTime} from "../../Partials/ShowTime.jsx";
 import {Link} from "react-router-dom";
 import {Reactions} from "../Button/Reactions.jsx";
+import {memo} from "react";
 
-export const ListCard = ({item}) => {
+let ListCard = ({item}) => {
     return (
         <>
             {/*<!-- Card -->*/}
@@ -35,3 +36,7 @@ export const ListCard = ({item}) => {
         </>
     )
 }
+
+ListCard = memo(ListCard)
+
+export default ListCard
