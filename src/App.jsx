@@ -9,7 +9,6 @@ import {useDispatch, useSelector} from "react-redux";
 import {Spinner} from "./Components/Partials/Spinner.jsx";
 import {E404} from "./Components/Error/E404.jsx";
 import {fetchShops, selectShopError, selectShopStatus} from "./Features/Shop/shop.slice.js";
-import {SwiperList as ShopSwiperList} from "./Components/Shop/Carousels/SwiperList.jsx";
 
 function App() {
     const dispatch = useDispatch();
@@ -52,7 +51,7 @@ function App() {
                     <ItemGridList/>
                 </div>
             ))}
-            {renderContent(shopStatus, shopError, ShopSwiperList)}
+            {/*{renderContent(shopStatus, shopError, ShopSwiperList)}*/}
         </>
     );
 }

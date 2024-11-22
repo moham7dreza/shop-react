@@ -21,7 +21,7 @@ class CategoryApiService {
     // Read
     static async getCategories() {
         try {
-            const response = await axios.get(this.getFullUrl('items/categories'));
+            const response = await axios.get(this.getFullUrl('items/categories/index'));
             return response.data;
         } catch (error) {
             throw error;
