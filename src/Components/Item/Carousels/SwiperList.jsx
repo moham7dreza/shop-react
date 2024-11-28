@@ -1,6 +1,4 @@
 import {SimpleCard} from "../Cards/SimpleCard";
-import {useSelector} from "react-redux";
-import {selectItems} from "../../../Features/Item/item.slice.js";
 import {useGetItemsQuery} from "../../../Features/Api/api.slice.js";
 
 export const SwiperList = () => {
@@ -11,6 +9,7 @@ export const SwiperList = () => {
     const {
         data: items
     } = useGetItemsQuery(undefined, undefined)
+    console.log(items)
 
     return (
         <>
