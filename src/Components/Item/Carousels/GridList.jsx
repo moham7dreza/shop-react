@@ -1,11 +1,16 @@
 import ListCard from "../Cards/ListCard.jsx";
 import {useSelector} from "react-redux";
 import {selectItems} from "../../../Features/Item/item.slice.js";
+import {useGetItemsQuery} from "../../../Features/Api/api.slice.js";
 
 export const GridList = () => {
-    const items = useSelector(selectItems)
+    // const items = useSelector(selectItems)
+    //
+    // const sortedItems = items.slice().sort((a, b) => b.created_at.localeCompare(a.created_at))
 
-    const sortedItems = items.slice().sort((a, b) => b.created_at.localeCompare(a.created_at))
+    const {
+        data: items
+    } = useGetItemsQuery(undefined, undefined)
 
     return (
         <>
@@ -20,7 +25,7 @@ export const GridList = () => {
                 {/*<!-- Grid -->*/}
                 <div className="grid lg:grid-cols-2 lg:gap-y-16 gap-10">
                     {
-                        sortedItems.map((item) => (
+                        items.map((item) => (
                             <ListCard key={item.id} item={item}/>
                         ))
                     }

@@ -13,5 +13,5 @@ export const store = configureStore({
         categories: categoryReducer,
         [apiSlice.reducerPath]: apiSlice.reducer,
     },
-    middleware: getDefaultMiddleware => getDefaultMiddleware().concat(apiSlice.middleware)
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(apiSlice.middleware)
 })

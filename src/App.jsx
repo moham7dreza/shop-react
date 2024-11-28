@@ -17,14 +17,14 @@ function App() {
     const itemError = useSelector(selectItemError);
     const bannerStatus = useSelector(selectBannerStatus);
     const bannerError = useSelector(selectBannerError);
-    const shopStatus = useSelector(selectShopStatus);
-    const shopError = useSelector(selectShopError);
+    // const shopStatus = useSelector(selectShopStatus);
+    // const shopError = useSelector(selectShopError);
 
     useEffect(() => {
-        if (itemStatus === 'idle') dispatch(fetchItems());
-        if (bannerStatus === 'idle') dispatch(fetchBanners());
-        if (shopStatus === 'idle') dispatch(fetchShops());
-    }, [itemStatus, bannerStatus, dispatch, shopStatus]);
+        // if (itemStatus === 'idle') dispatch(fetchItems());
+        // if (bannerStatus === 'idle') dispatch(fetchBanners());
+        // if (shopStatus === 'idle') dispatch(fetchShops());
+    }, [itemStatus, bannerStatus, dispatch]);
 
     const renderContent = (status, error, Component) => {
         switch (status) {
@@ -42,14 +42,14 @@ function App() {
     return (
         <>
             <Hero/>
-            {renderContent(bannerStatus, bannerError, Masonry)}
+            {/*{renderContent(bannerStatus, bannerError, Masonry)}*/}
             {renderContent(itemStatus, itemError, () => (
                 <div>
                     <ItemSwiperList/>
                     <ItemGridList/>
                 </div>
             ))}
-            {renderContent(shopStatus, shopError, ShopSwiperList)}
+            {/*{renderContent(shopStatus, shopError, ShopSwiperList)}*/}
         </>
     );
 }

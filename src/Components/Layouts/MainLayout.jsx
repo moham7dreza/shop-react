@@ -16,7 +16,7 @@ function MainLayout() {
 
     useEffect(() => {
         if (categoryStatus === 'idle') {
-            dispatch(fetchCategories())
+            // dispatch(fetchCategories())
         }
     }, [categoryStatus, dispatch]);
 
