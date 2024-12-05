@@ -1,15 +1,14 @@
 import {SimpleCard} from "../Cards/SimpleCard";
-import {useGetItemsQuery} from "../../../Features/Api/api.slice.js";
 
-export const SwiperList = () => {
+export const SwiperList = ({items}) => {
     // const items = useSelector(selectItems)
     //
     // const sortedItems = items.slice().sort((a, b) => b.created_at.localeCompare(a.created_at))
 
-    const {
-        data: items
-    } = useGetItemsQuery(undefined, undefined)
-    console.log(items)
+    // const {
+    //     data: items
+    // } = useGetItemsQuery(undefined, undefined)
+    // console.log(items)
 
     return (
         <>

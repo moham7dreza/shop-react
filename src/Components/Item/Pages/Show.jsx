@@ -1,18 +1,24 @@
 import {Link, useParams} from "react-router-dom";
-import {useSelector} from "react-redux";
-import {selectItem} from "../../../Features/Item/item.slice.js";
 import {E404} from "../../Error/E404.jsx";
+import {useGetItemQuery} from "../../../Features/Api/api.slice.js";
+import {Spinner} from "../../Partials/Spinner.jsx";
 
 export const Show = () => {
     const {id} = useParams()
-
-    const item = useSelector(state => selectItem(state, id))
+    const {
+        data: item,
+        isFetching,
+        isSuccess,
+    } = useGetItemQuery(id)
+    // const item = useSelector(state => selectItem(state, id))
     console.log(item)
     if (!item) {
         return <E404/>
     }
 
-    return (<>
+    let content;
+    if (isFetching) content = <Spinner/>;
+    else if (isSuccess) content = (<>
         {/*<!-- Blog Article -->*/}
         <div className="max-w-[85rem] px-4 sm:px-6 lg:px-8 mx-auto">
             <div className="grid lg:grid-cols-3 gap-y-8 lg:gap-y-0 lg:gap-x-6">
@@ -265,5 +271,7 @@ export const Show = () => {
             </div>
         </div>
         {/*<!-- End Blog Article -->*/}
-    </>)
+    </>);
+
+    return content
 }

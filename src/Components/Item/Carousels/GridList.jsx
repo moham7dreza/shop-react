@@ -1,6 +1,6 @@
 import ListCard from "../Cards/ListCard.jsx";
 
-export const GridList = () => {
+export const GridList = ({items}) => {
     // const items = useSelector(selectItems)
     //
     // const sortedItems = items.slice().sort((a, b) => b.created_at.localeCompare(a.created_at))

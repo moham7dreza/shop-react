@@ -13,6 +13,9 @@ export const apiSlice = createApi({
         getItems: builder.query({
             query: () => '/items'
         }),
+        getItem: builder.query({
+            query: (id) => `/items/${id}`
+        }),
         getBanners: builder.query({
             query: () => '/banners'
         }),
@@ -25,6 +28,7 @@ export const apiSlice = createApi({
 export const {
     useGetShopsQuery,
     useGetItemsQuery,
+    useGetItemQuery,
     useGetBannersQuery,
     useGetCategoriesQuery,
 } = apiSlice
