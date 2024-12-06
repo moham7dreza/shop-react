@@ -22,6 +22,14 @@ export const apiSlice = createApi({
         getCategories: builder.query({
             query: () => '/categories/index'
         }),
+        registerNewUserWithMobile: builder.mutation({
+            query: (data) => ({
+                url: '/auth-plus/register-mobile',
+                method: 'POST',
+                body: JSON.stringify(data),
+            }),
+            invalidatesTags: ['shops', 'items', 'banners']
+        })
     })
 })
 
@@ -31,4 +39,5 @@ export const {
     useGetItemQuery,
     useGetBannersQuery,
     useGetCategoriesQuery,
+    useRegisterNewUserWithMobileMutation,
 } = apiSlice

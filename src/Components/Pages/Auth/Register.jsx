@@ -1,7 +1,7 @@
 import {Link, useNavigate} from "react-router-dom";
 import {useState} from "react";
 import {useDispatch} from "react-redux";
-import {userWasRegistered} from "../../../Features/User/user.slice.js";
+import {useRegisterNewUserWithMobileMutation} from "../../../Features/Api/api.slice.js";
 
 export const Register = () => {
 
@@ -9,6 +9,8 @@ export const Register = () => {
     const [pass, setPass] = useState('')
     const [confirmPass, setConfirmPass] = useState('')
     const [terms, setTerms] = useState(0)
+
+    const [registerNewUserWithMobile, {isLoading}] = useRegisterNewUserWithMobileMutation()
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -18,18 +20,26 @@ export const Register = () => {
     const onConfirmPassChanged = (e) => setConfirmPass(e.target.value)
     const onTermsChanged = (e) => setTerms(e.target.value)
 
-    const canSave = [email, pass, confirmPass, terms].every(Boolean) && pass === confirmPass
-    const handleFormSubmit = () => {
+    const canSave = [email, pass, confirmPass, terms].every(Boolean)
+        &&
+        pass === confirmPass
+        &&
+        !isLoading
+    const handleFormSubmit = async () => {
         if (canSave) {
+            try {
+                // force to return promise with unwrap
+                await registerNewUserWithMobile({email, password: pass}).unwrap()
 
-            dispatch(userWasRegistered(email, pass))
+                setTerms(0)
+                setPass('')
+                setConfirmPass('')
+                setEmail('')
 
-            setTerms(0)
-            setPass('')
-            setConfirmPass('')
-            setEmail('')
-
-            navigate('/')
+                navigate('/')
+            } catch (error) {
+                console.error(error)
+            }
         }
     }
 
