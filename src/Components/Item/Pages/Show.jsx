@@ -1,6 +1,5 @@
 import {Link, useParams} from "react-router-dom";
-import {E404} from "../../Error/E404.jsx";
-import {useGetItemQuery} from "../../../Features/Api/api.slice.js";
+import {useGetItemQuery, useUpdateItemMutation} from "../../../Features/Api/api.slice.js";
 import {Spinner} from "../../Partials/Spinner.jsx";
 
 export const Show = () => {
@@ -11,9 +10,18 @@ export const Show = () => {
         isSuccess,
     } = useGetItemQuery(id)
     // const item = useSelector(state => selectItem(state, id))
-    console.log(item)
-    if (!item) {
-        return <E404/>
+    // console.log(item)
+    // if (!item) {
+    //     return <E404/>
+    // }
+
+    const [updateItem, {isLoading}] = useUpdateItemMutation()
+    const handleUpdate = async () => {
+        try {
+            await updateItem(item).unwrap()
+        } catch (error) {
+            console.error(error)
+        }
     }
 
     let content;

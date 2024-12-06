@@ -34,6 +34,14 @@ export const apiSlice = createApi({
                 body: JSON.stringify(data),
             }),
             invalidatesTags: ['users']
+        }),
+        updateItem: builder.mutation({
+            query: (item) => ({
+                url: `/items/${item.id}/update`,
+                method: 'PUT',
+                body: JSON.stringify(item),
+            }),
+            invalidatesTags: ['items']
         })
     })
 })
@@ -45,4 +53,5 @@ export const {
     useGetBannersQuery,
     useGetCategoriesQuery,
     useRegisterNewUserWithMobileMutation,
+    useUpdateItemMutation,
 } = apiSlice
