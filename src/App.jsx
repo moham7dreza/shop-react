@@ -13,6 +13,7 @@ function App() {
         isSuccess,
         isError,
         error,
+        refetch,
     } = useGetItemsQuery(undefined, undefined)
     console.log(items)
 
@@ -57,6 +58,7 @@ function App() {
     return (
         <>
             <Hero/>
+            <button onClick={refetch}>sync items with server</button>
             {/*{renderContent(bannerStatus, bannerError, Masonry)}*/}
             {/*{renderContent(itemStatus, itemError, () => (*/}
             {/*    <div>*/}

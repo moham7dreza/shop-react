@@ -6,21 +6,26 @@ export const apiSlice = createApi({
     baseQuery: fetchBaseQuery({
         baseUrl: config.apiUrl,
     }),
+    tagTypes: ['shops', 'items', 'banners', 'users', 'categories'],
     endpoints: (builder) => ({
         getShops: builder.query({
-            query: () => '/shops'
+            query: () => '/shops',
+            providesTags: ['shops']
         }),
         getItems: builder.query({
-            query: () => '/items'
+            query: () => '/items',
+            providesTags: ['items']
         }),
         getItem: builder.query({
             query: (id) => `/items/${id}`
         }),
         getBanners: builder.query({
-            query: () => '/banners'
+            query: () => '/banners',
+            providesTags: ['banners']
         }),
         getCategories: builder.query({
-            query: () => '/categories/index'
+            query: () => '/categories/index',
+            providesTags: ['categories']
         }),
         registerNewUserWithMobile: builder.mutation({
             query: (data) => ({
@@ -28,7 +33,7 @@ export const apiSlice = createApi({
                 method: 'POST',
                 body: JSON.stringify(data),
             }),
-            invalidatesTags: ['shops', 'items', 'banners']
+            invalidatesTags: ['users']
         })
     })
 })
