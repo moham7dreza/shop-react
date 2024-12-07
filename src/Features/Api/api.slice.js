@@ -14,10 +14,23 @@ export const apiSlice = createApi({
         }),
         getItems: builder.query({
             query: () => '/items',
-            providesTags: ['items']
+            // like laravel : cache()->put("items-id-{$item->id}")
+            providesTags: (items = [], error, arg) => [
+                'items',
+                // to replace existing items array with this we should use speared operator
+                // destruct id from item object
+                ...items.map(({id}) => ({type: 'items', id}))
+            ]
         }),
         getItem: builder.query({
-            query: (id) => `/items/${id}`
+            query: (id) => `/items/${id}`,
+            // arg if id provided above
+            providesTags: (item, error, arg) => [
+                {
+                    type: "items",
+                    id: arg,
+                }
+            ]
         }),
         getBanners: builder.query({
             query: () => '/banners',
@@ -41,7 +54,12 @@ export const apiSlice = createApi({
                 method: 'PUT',
                 body: JSON.stringify(item),
             }),
-            invalidatesTags: ['items']
+            invalidatesTags: (item, error, arg) => [
+                {
+                    type: 'items',
+                    id: arg.id,
+                }
+            ]
         })
     })
 })
