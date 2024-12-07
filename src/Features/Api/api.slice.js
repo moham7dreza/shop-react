@@ -60,6 +60,9 @@ export const apiSlice = createApi({
                     id: arg.id,
                 }
             ]
+        }),
+        getUsers: builder.query({
+            query: () => "/users",
         })
     })
 })

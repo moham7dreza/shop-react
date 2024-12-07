@@ -15,3 +15,5 @@ export const store = configureStore({
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(apiSlice.middleware)
 })
+
+store.dispatch(apiSlice.endpoints.getUsers.initiate())
