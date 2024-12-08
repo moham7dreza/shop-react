@@ -9,8 +9,17 @@ export const verifyMobileApiCall = createAsyncThunk('users/verifyMobile', (data)
 export const loginOtpApiCall = createAsyncThunk('users/loginOtp', (data) => AuthApiService.loginOtp(data))
 export const logoutApiCall = createAsyncThunk('users/logout', (data) => AuthApiService.logout(data))
 
+// api injection to main api in another file
+export const extendedApiSlice = apiSlice.injectEndpoints({
+    endpoints: builder => ({
+        getUsers: builder.query({
+            query: () => "/users",
+        })
+    })
+})
+
 // create memoized selector that gets data from cache
-export const selectUsersResult = apiSlice.endpoints.getUsers.select(undefined)
+export const selectUsersResult = extendedApiSlice.endpoints.getUsers.select(undefined)
 
 export const selectUsers = createSelector(
     selectUsersResult,
@@ -21,6 +30,10 @@ export const selectUser = createSelector(
     selectUsers, (state, id) => id,
     (users, id) => users.find(user => user.id === id)
 )
+
+export const {
+    useGetUsersQuery,
+} = extendedApiSlice
 
 const userSlice = createSlice({
     name: "users",
