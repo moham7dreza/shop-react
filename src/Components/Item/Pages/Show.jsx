@@ -1,5 +1,5 @@
 import {Link, useParams} from "react-router-dom";
-import {useGetItemQuery, useUpdateItemMutation} from "../../../Features/Api/api.slice.js";
+import {useDeleteItemMutation, useGetItemQuery, useUpdateItemMutation} from "../../../Features/Api/api.slice.js";
 import {Spinner} from "../../Partials/Spinner.jsx";
 
 export const Show = () => {
@@ -19,6 +19,15 @@ export const Show = () => {
     const handleUpdate = async () => {
         try {
             await updateItem(item).unwrap()
+        } catch (error) {
+            console.error(error)
+        }
+    }
+
+    const [deleteItem, {isLoading}] = useDeleteItemMutation()
+    const handleDelete = async () => {
+        try {
+            await deleteItem(id)
         } catch (error) {
             console.error(error)
         }
