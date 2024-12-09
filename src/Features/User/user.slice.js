@@ -1,4 +1,4 @@
-import {createAsyncThunk, createSelector, createSlice, nanoid} from "@reduxjs/toolkit";
+import {createAsyncThunk, createEntityAdapter, createSelector, createSlice, nanoid} from "@reduxjs/toolkit";
 import AuthApiService from "../../Services/AuthApiService.js";
 import {apiSlice} from "../Api/api.slice.js";
 
@@ -9,27 +9,41 @@ export const verifyMobileApiCall = createAsyncThunk('users/verifyMobile', (data)
 export const loginOtpApiCall = createAsyncThunk('users/loginOtp', (data) => AuthApiService.loginOtp(data))
 export const logoutApiCall = createAsyncThunk('users/logout', (data) => AuthApiService.logout(data))
 
+const userAdapter = createEntityAdapter()
+const initialState = userAdapter.getInitialState()
+
 // api injection to main api in another file
 export const extendedApiSlice = apiSlice.injectEndpoints({
     endpoints: builder => ({
         getUsers: builder.query({
             query: () => "/users",
+            // directly cache users data with return it
+            transformResponse: users => {
+                return userAdapter.setAll(initialState, users)
+            }
         })
     })
 })
 
-// create memoized selector that gets data from cache
 export const selectUsersResult = extendedApiSlice.endpoints.getUsers.select(undefined)
 
-export const selectUsers = createSelector(
+// we can use it in extraReducers
+const {
+    matchFulfilled,
+    matchPending,
+    matchRejected,
+} = extendedApiSlice.endpoints.getUsers
+
+// create memoized selector that gets data from cache
+export const selectUsersData = createSelector(
     selectUsersResult,
     users => users?.data ?? [],
 )
-
-export const selectUser = createSelector(
-    selectUsers, (state, id) => id,
-    (users, id) => users.find(user => user.id === id)
-)
+//
+// export const selectUser = createSelector(
+//     selectUsers, (state, id) => id,
+//     (users, id) => users.find(user => user.id === id)
+// )
 
 export const {
     useGetUsersQuery,
@@ -37,9 +51,7 @@ export const {
 
 const userSlice = createSlice({
     name: "users",
-    initialState: {
-        list: [],
-    },
+    initialState: initialState,
     reducers: {
         userWasLoggedIn: (state, action) => {
 
@@ -84,6 +96,11 @@ const userSlice = createSlice({
 
 // export const selectUsers = state => state.users.list
 // export const selectUser = (state, id) => state.users.list.find(user => user.id === Number(id))
+
+export const {
+    selectAll: selectUsers,
+    selectById: selectUser,
+} = userAdapter.getSelectors(state => selectUsersData(state) ?? initialState)
 
 export default userSlice.reducer
 
