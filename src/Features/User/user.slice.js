@@ -20,8 +20,26 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
             // directly cache users data with return it
             transformResponse: users => {
                 return userAdapter.setAll(initialState, users)
-            }
-        })
+            },
+            invalidatesTags: ["users"]
+        }),
+        storeUser: builder.mutation({
+            query: user => ({
+                url: "/users",
+                method: "POST",
+                body: user,
+            }),
+            // we transformed response and use entity adapter
+            // so we can not define tag id pairs for each id
+            invalidatesTags: ["users"]
+        }),
+        deleteUser: builder.mutation({
+            query: id => ({
+                url: `/users/${id}`,
+                method: "DELETE",
+            }),
+            invalidatesTags: ["users"]
+        }),
     })
 })
 
@@ -47,6 +65,8 @@ export const selectUsersData = createSelector(
 
 export const {
     useGetUsersQuery,
+    useStoreUserMutation,
+    useDeleteUserMutation,
 } = extendedApiSlice
 
 const userSlice = createSlice({
