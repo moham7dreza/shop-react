@@ -19,6 +19,11 @@ const itemSlice = createSlice({
             }
         }
     },
+    // extraReducers: {
+    //     [fetchItems.pending]: (state, action) => {
+    //         state.status = 'pending'
+    //     }
+    // }
     extraReducers: builder => {
         builder.addCase(fetchItems.pending, (state, action) => {
             state.status = 'pending'
