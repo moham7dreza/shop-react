@@ -8,6 +8,8 @@ import {useDispatch, useSelector} from "react-redux";
 import {Spinner} from "./Components/Partials/Spinner.jsx";
 import {E404} from "./Components/Error/E404.jsx";
 import {fetchShops, selectShopError, selectShopStatus} from "./Features/Shop/shop.slice.js";
+import {Helmet} from "react-helmet";
+import {Master} from "./Components/Layouts/Master.jsx";
 
 function App() {
     const dispatch = useDispatch();
@@ -39,14 +41,19 @@ function App() {
 
     return (
         <>
-            <Hero/>
+            <Master>
+                <Helmet>
+                    <title>shop</title>
+                </Helmet>
+            </Master>
+            {/*<Hero/>*/}
             {/*{renderContent(bannerStatus, bannerError, Masonry)}*/}
-            {renderContent(itemStatus, itemError, () => (
-                <div>
-                    <ItemSwiperList/>
-                    <ItemGridList/>
-                </div>
-            ))}
+            {/*{renderContent(itemStatus, itemError, () => (*/}
+            {/*    <div>*/}
+            {/*        <ItemSwiperList/>*/}
+            {/*        <ItemGridList/>*/}
+            {/*    </div>*/}
+            {/*))}*/}
             {/*{renderContent(shopStatus, shopError, ShopSwiperList)}*/}
         </>
     );
