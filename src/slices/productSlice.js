@@ -1,6 +1,7 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import axios from "axios";
 import config from "../Config/app.js";
+import {useSelector} from "react-redux";
 
 // async function fetchData() {
 //     const [fetchError, response] ?= await axios.get(`${config.apiUrl}/items`);
@@ -47,5 +48,7 @@ export const productSlice = createSlice({
         })
     },
 })
+
+export const selectProduct = (state, id) => state.products.items.find(item => item.id === Number(id))
 
 export default productSlice.reducer

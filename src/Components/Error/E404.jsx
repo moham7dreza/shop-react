@@ -1,6 +1,10 @@
-import {Link} from "react-router-dom";
+import {Link, useRouteError} from "react-router-dom";
 
 export const E404 = () => {
+
+    const error = useRouteError()
+    console.error(error)
+
     return (
         <>
             <div className="dark:bg-slate-900 bg-white max-w-[80rem] flex flex-col mx-auto size-full">

@@ -3,11 +3,13 @@ import {useSelector} from "react-redux";
 import {selectItem} from "../../../Features/Item/item.slice.js";
 import {E404} from "../../Error/E404.jsx";
 import CustomNumeralNumericFormat from "../../../Helpers/Price.jsx";
+import {selectProduct} from "../../../slices/productSlice.js";
 
 export const Show = () => {
     const {id} = useParams()
 
-    const item = useSelector(state => selectItem(state, id))
+    // const item = useSelector(state => selectItem(state, id))
+    const item = useSelector(state => selectProduct(state, id))
     console.log(item)
     if (!item) {
         return <E404/>

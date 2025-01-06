@@ -9,34 +9,34 @@ import {useEffect} from "react";
 
 function MainLayout() {
 
-    const dispatch = useDispatch()
-
-    const categoryStatus = useSelector(selectCategoryStatus)
-    const categoryError = useSelector(selectCategoryError)
-
-    useEffect(() => {
-        if (categoryStatus === 'idle') {
-            dispatch(fetchCategories())
-        }
-    }, [categoryStatus, dispatch]);
-
-    let headerContent;
-
-    switch (categoryStatus) {
-        case 'pending':
-            headerContent = <Spinner/>
-            break
-        case 'completed':
-            headerContent = <div>
-                <Header/>
-            </div>
-            break
-        case 'failed':
-            headerContent = <div>{categoryError}</div>
-            break
-        default:
-            headerContent = <E404/>
-    }
+    // const dispatch = useDispatch()
+    //
+    // const categoryStatus = useSelector(selectCategoryStatus)
+    // const categoryError = useSelector(selectCategoryError)
+    //
+    // useEffect(() => {
+    //     if (categoryStatus === 'idle') {
+    //         dispatch(fetchCategories())
+    //     }
+    // }, [categoryStatus, dispatch]);
+    //
+    // let headerContent;
+    //
+    // switch (categoryStatus) {
+    //     case 'pending':
+    //         headerContent = <Spinner/>
+    //         break
+    //     case 'completed':
+    //         headerContent = <div>
+    //             <Header/>
+    //         </div>
+    //         break
+    //     case 'failed':
+    //         headerContent = <div>{categoryError}</div>
+    //         break
+    //     default:
+    //         headerContent = <E404/>
+    // }
 
     return (
         <>
@@ -45,7 +45,7 @@ function MainLayout() {
                     <div className="max-w-[80rem] flex flex-col mx-auto w-full h-full">
                         {/*<!-- ========== HEADER ========== -->*/}
                         {
-                            headerContent
+                            // headerContent
                         }
                         {/*<!-- ========== END HEADER ========== -->*/}
 
