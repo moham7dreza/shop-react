@@ -2,6 +2,7 @@ import {Link, useParams} from "react-router-dom";
 import {useSelector} from "react-redux";
 import {selectItem} from "../../../Features/Item/item.slice.js";
 import {E404} from "../../Error/E404.jsx";
+import CustomNumeralNumericFormat from "../../../Helpers/Price.jsx";
 
 export const Show = () => {
     const {id} = useParams()
@@ -90,7 +91,8 @@ export const Show = () => {
                                                 <path
                                                     d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
                                             </svg>
-                                            {item.reactions_count}
+                                            <CustomNumeralNumericFormat value={item.reactions_count} thousandsSeprator={','}/>
+
                                             <span
                                                 className="hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible opacity-0 transition-opacity inline-block absolute invisible z-10 py-1 px-2 bg-gray-900 text-xs font-medium text-white rounded shadow-sm dark:bg-black"
                                                 role="tooltip">
