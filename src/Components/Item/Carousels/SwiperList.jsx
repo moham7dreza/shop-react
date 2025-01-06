@@ -1,12 +1,18 @@
 import {SimpleCard} from "../Cards/SimpleCard";
 import {useSelector} from "react-redux";
 import {selectItems} from "../../../Features/Item/item.slice.js";
+import {useGetProductsQuery} from "../../../Features/Api/productApi.js";
 
 export const SwiperList = () => {
-    const items = useSelector(selectItems)
+    // const items = useSelector(selectItems)
+    //
+    // const sortedItems = items.slice().sort((a, b) => b.created_at.localeCompare(a.created_at))
 
-    const sortedItems = items.slice().sort((a, b) => b.created_at.localeCompare(a.created_at))
-
+    const {items, status} = useSelector(state => state.products)
+    console.log(status)
+    console.log(items)
+    const {data: items2} = useGetProductsQuery(undefined, undefined)
+    console.log(items2)
     return (
         <>
             {/*<!-- Card Blog -->*/}
@@ -20,8 +26,8 @@ export const SwiperList = () => {
                 {/*<!-- Grid -->*/}
                 <div className="grid lg:grid-cols-4 lg:gap-y-16 gap-10">
                     {
-                        sortedItems.map((item) => (
-                            <SimpleCard key={item.id} item={item}/>
+                        items?.map((item, index) => (
+                            <SimpleCard key={index} item={item}/>
                         ))
                     }
                 </div>

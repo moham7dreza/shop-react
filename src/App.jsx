@@ -10,6 +10,7 @@ import {E404} from "./Components/Error/E404.jsx";
 import {fetchShops, selectShopError, selectShopStatus} from "./Features/Shop/shop.slice.js";
 import {Helmet} from "react-helmet";
 import {Master} from "./Components/Layouts/Master.jsx";
+import {useGetProductsQuery} from "./Features/Api/productApi.js";
 
 function App() {
     const dispatch = useDispatch();
@@ -19,6 +20,9 @@ function App() {
     const bannerError = useSelector(selectBannerError);
     const shopStatus = useSelector(selectShopStatus);
     const shopError = useSelector(selectShopError);
+
+    const {data: items2} = useGetProductsQuery(undefined, undefined)
+    console.log(items2)
 
     useEffect(() => {
         if (itemStatus === 'idle') dispatch(fetchItems());
@@ -45,6 +49,8 @@ function App() {
                 <Helmet>
                     <title>shop</title>
                 </Helmet>
+
+                <ItemSwiperList/>
             </Master>
             {/*<Hero/>*/}
             {/*{renderContent(bannerStatus, bannerError, Masonry)}*/}

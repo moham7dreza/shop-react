@@ -11,7 +11,7 @@ export const productApi = createApi({
     ],
     endpoints: builder => ({
         getProducts: builder.query({
-            query: () => '/products',
+            query: () => '/items',
             providesTags: (products = [], error, arg) => [
                 'products',
                 ...products.map(({id}) => ({type: 'products', id}))

@@ -16,12 +16,6 @@ import config from "../Config/app.js";
 //     return $jsonData;
 // }
 
-const initialState = {
-    items: [],
-    status: 'idle',
-    error: null,
-}
-
 export const fetchProducts = createAsyncThunk(
     'products/fetchProducts',
     async () => {
@@ -36,13 +30,17 @@ export const fetchProducts = createAsyncThunk(
 
 export const productSlice = createSlice({
     name: 'products',
-    initialState,
+    initialState: {
+        items: [],
+        status: 'idle',
+        error: null,
+    },
     extraReducers: builder => {
         builder.addCase(fetchProducts.pending, (state, action) => {
             state.status = 'pending'
         }).addCase(fetchProducts.fulfilled, (state, action) => {
             state.status = 'completed'
-            state.list = action.payload.data
+            state.items = action.payload.data
         }).addCase(fetchProducts.rejected, (state, action) => {
             state.status = 'failed'
             state.error = action.error.message
