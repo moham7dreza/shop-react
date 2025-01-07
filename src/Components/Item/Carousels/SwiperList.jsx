@@ -8,10 +8,10 @@ export const SwiperList = () => {
     //
     // const sortedItems = items.slice().sort((a, b) => b.created_at.localeCompare(a.created_at))
 
-    const {items, status} = useSelector(state => state.products)
+    // const {items2, status} = useSelector(state => state.products)
     // console.log(status)
     // console.log(items)
-    const {data: items2} = useGetProductsQuery(undefined, undefined)
+    const {data: items} = useGetProductsQuery(undefined, undefined)
     // console.log(items2)
     return (
         <>
