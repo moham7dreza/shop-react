@@ -12,10 +12,11 @@ export const productApi = createApi({
     endpoints: builder => ({
         getProducts: builder.query({
             query: () => '/items',
-            providesTags: (products = [], error, arg) => [
+            transformResponse: (response) => response.data,
+            providesTags: (result = [], error, arg) => [
                 'products',
-                ...products.map(({id}) => ({type: 'products', id}))
-            ]
+                ...result.map(({ id }) => ({ type: 'products', id })),
+            ],
         })
     })
 })
