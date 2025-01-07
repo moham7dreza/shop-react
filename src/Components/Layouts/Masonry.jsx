@@ -5,7 +5,7 @@ import {isEmptyArray} from "formik";
 
 export const Masonry = () => {
     const banners = useSelector(selectBanners)
-    console.log(banners)
+    // console.log(banners)
 
     return (
         <>

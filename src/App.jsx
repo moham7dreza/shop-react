@@ -22,7 +22,7 @@ function App() {
     const shopError = useSelector(selectShopError);
 
     const {data: items2} = useGetProductsQuery(undefined, undefined)
-    console.log(items2)
+    // console.log(items2)
 
     useEffect(() => {
         if (itemStatus === 'idle') dispatch(fetchItems());
