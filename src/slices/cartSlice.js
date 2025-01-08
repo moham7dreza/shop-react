@@ -2,7 +2,7 @@ import {createSlice} from "@reduxjs/toolkit";
 import {toast} from "react-toastify";
 
 export const cartSlice = createSlice({
-    name: 'cartItems',
+    name: 'cart',
     initialState: {
         status: 'idle',
         items: localStorage.getItem('cartItems')
@@ -57,6 +57,8 @@ export const cartSlice = createSlice({
         }
     }
 })
+
+export const getCartItems = state => state.cart.items
 
 export const {
     addToCart,

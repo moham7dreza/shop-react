@@ -26,7 +26,7 @@ export const Show = () => {
     const handleAddToCart = (item) => {
         dispatch(addToCart(item))
 
-        navigate('/')
+        navigate('/invoice')
     }
 
     const increaseCount = () => setCount(count + 1)

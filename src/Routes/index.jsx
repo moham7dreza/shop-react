@@ -9,6 +9,7 @@ import {Login} from "../Components/Pages/Auth/Login.jsx";
 import {Register} from "../Components/Pages/Auth/Register.jsx";
 import {ForgotPassword} from "../Components/Pages/Auth/ForgotPassword.jsx";
 import {Terms} from "../Components/Pages/Terms.jsx";
+import {Invoice} from "../Components/Invoice.jsx";
 
 export const router = createBrowserRouter([
     {
@@ -47,6 +48,10 @@ export const router = createBrowserRouter([
             {
                 path: 'shops/:id/items',
                 element: <ShopItems/>
+            },
+            {
+                path: 'invoice',
+                element: <Invoice/>
             },
         ]
     }
