@@ -1,10 +1,7 @@
 import {Link, useNavigate, useParams} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
-import {selectItem} from "../../../Features/Item/item.slice.js";
-import {E404} from "../../Error/E404.jsx";
 import CustomNumeralNumericFormat from "../../../Helpers/Price.jsx";
 import {selectProduct} from "../../../slices/productSlice.js";
-import {Helmet} from "react-helmet";
 import {Spinner} from "../../Partials/Spinner.jsx";
 import {useState} from "react";
 import {addToCart} from "../../../slices/cartSlice.js";
@@ -33,9 +30,6 @@ export const Show = () => {
 
     return (<>
         {item ? (<section>
-            <Helmet>
-                <title>{item.title}</title>
-            </Helmet>
             {/*<!-- Blog Article -->*/}
             <div className="max-w-[85rem] px-4 sm:px-6 lg:px-8 mx-auto">
                 <div className="grid lg:grid-cols-3 gap-y-8 lg:gap-y-0 lg:gap-x-6">

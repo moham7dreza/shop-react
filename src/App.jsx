@@ -1,16 +1,5 @@
-import {Hero} from "./Components/Layouts/Hero.jsx";
 import {SwiperList as ItemSwiperList} from "./Components/Item/Carousels/SwiperList.jsx";
-import {GridList as ItemGridList} from "./Components/Item/Carousels/GridList.jsx";
-import {useEffect} from "react";
-import {fetchItems, selectItemError, selectItemStatus} from "./Features/Item/item.slice.js";
-import {fetchBanners, selectBannerError, selectBannerStatus} from "./Features/Banner/banner.slice.js";
-import {useDispatch, useSelector} from "react-redux";
-import {Spinner} from "./Components/Partials/Spinner.jsx";
-import {E404} from "./Components/Error/E404.jsx";
-import {fetchShops, selectShopError, selectShopStatus} from "./Features/Shop/shop.slice.js";
-import {Helmet} from "react-helmet";
 import {Master} from "./Components/Layouts/Master.jsx";
-import {useGetProductsQuery} from "./Features/Api/productApi.js";
 
 function App() {
     // const dispatch = useDispatch();
@@ -43,9 +32,6 @@ function App() {
     return (
         <>
             <Master>
-                <Helmet>
-                    <title>shop</title>
-                </Helmet>
 
                 <ItemSwiperList/>
             </Master>
