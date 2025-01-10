@@ -23,11 +23,12 @@ export const cartSlice = createSlice({
                 }
                 toast.info('product count increased')
             } else {
-                let product = {
-                    ...action.payload,
-                    count: action.payload.count,
-                }
-                state.items.push(product)
+                // console.log(action.payload)
+                // let product = {
+                //     ...action.payload,
+                //     count: action.payload.count,
+                // }
+                state.items.push(action.payload)
                 toast.success('product added successfully')
             }
 
@@ -35,15 +36,22 @@ export const cartSlice = createSlice({
         },
         getTotalAmount: (state, action) => {
             let {total, count} = state.items.reduce(
+                // section to how calc
+                // accumulator, currentValue
                 (cartTotal, cartItem) => {
-                    const {itemPrice, itemCount} = cartItem
-                    const itemTotalAmount = itemPrice * itemCount
-
+                    // console.log('cartTotal : ', cartTotal)
+                    // console.log('cartItem : ', current(cartItem))
+                    const {points, count} = cartItem
+                    // console.log('itemPrice : ', points)
+                    // console.log('itemCount : ', count)
+                    const itemTotalAmount = points * count
+                    // console.log('itemTotalAmount : ', itemTotalAmount)
                     cartTotal.total += itemTotalAmount
-                    cartTotal.count += itemCount
+                    cartTotal.count += count
 
                     return cartTotal
                 },
+                // section to how init
                 {
                     total: 0,
                     count: 0,
@@ -59,6 +67,8 @@ export const cartSlice = createSlice({
 })
 
 export const getCartItems = state => state.cart.items
+export const getCartTotalAmount = state => state.cart.amount
+export const getCartCount = state => state.cart.count
 
 export const {
     addToCart,

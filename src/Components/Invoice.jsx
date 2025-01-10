@@ -1,11 +1,15 @@
-import {addToCart, getCartItems, getTotalAmount} from "../slices/cartSlice.js";
+import {addToCart, getCartCount, getCartItems, getCartTotalAmount, getTotalAmount} from "../slices/cartSlice.js";
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
+import CustomNumeralNumericFormat from "../Helpers/Price.jsx";
 
-export function Invoice() {
+export const Invoice = () => {
 
     const cartItems = useSelector(getCartItems)
     // console.log(cartItems)
+
+    const cartCount = useSelector(getCartCount)
+    const cartTotalAmount = useSelector(getCartTotalAmount)
 
     const dispatch = useDispatch()
 
@@ -106,21 +110,21 @@ export function Invoice() {
                                         className="sm:col-span-2 text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">Item
                                     </div>
                                     <div
-                                        className="text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">Qty
+                                        className="text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">count
                                     </div>
                                     <div
                                         className="text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">Rate
                                     </div>
                                     <div
-                                        className="text-end text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">Amount
+                                        className="text-end text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">Point
                                     </div>
                                 </div>
 
                                 <div className="hidden sm:block border-b border-gray-200 dark:border-neutral-700"></div>
 
                                 {
-                                    cartItems?.map((item) => (
-                                        <section>
+                                    cartItems?.map((item, index) => (
+                                        <section key={index}>
                                             <div className="grid grid-cols-3 sm:grid-cols-5 gap-2">
                                                 <div className="col-span-full sm:col-span-2">
                                                     <h5 className="sm:hidden text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">Item</h5>
@@ -129,17 +133,18 @@ export function Invoice() {
                                                     </p>
                                                 </div>
                                                 <div>
-                                                    <h5 className="sm:hidden text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">Qty</h5>
-                                                    <p className="text-gray-800 dark:text-neutral-200">1</p>
+                                                    <h5 className="sm:hidden text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">count</h5>
+                                                    <p className="text-gray-800 dark:text-neutral-200">{item.count}</p>
                                                 </div>
                                                 <div>
                                                     <h5 className="sm:hidden text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">Rate</h5>
                                                     <p className="text-gray-800 dark:text-neutral-200">{item.rating}</p>
                                                 </div>
                                                 <div>
-                                                    <h5 className="sm:hidden text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">Amount</h5>
+                                                    <h5 className="sm:hidden text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">Point</h5>
                                                     <p className="sm:text-end text-gray-800 dark:text-neutral-200">
-                                                        {item.points}
+                                                        <CustomNumeralNumericFormat value={item.points}
+                                                                                    thousandSeparator=","/>
                                                     </p>
                                                 </div>
                                             </div>
@@ -165,7 +170,10 @@ export function Invoice() {
 
                                     <dl className="grid sm:grid-cols-5 gap-x-3">
                                         <dt className="col-span-3 font-semibold text-gray-800 dark:text-neutral-200">Total:</dt>
-                                        <dd className="col-span-2 text-gray-500 dark:text-neutral-500">$2750.00</dd>
+                                        <dd className="col-span-2 text-gray-500 dark:text-neutral-500">
+                                            <CustomNumeralNumericFormat value={cartTotalAmount}
+                                                                        thousandSeparator=","/>
+                                        </dd>
                                     </dl>
 
                                     <dl className="grid sm:grid-cols-5 gap-x-3">
