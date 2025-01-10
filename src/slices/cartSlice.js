@@ -34,6 +34,9 @@ export const cartSlice = createSlice({
 
             localStorage.setItem('cartItems', JSON.stringify(state.items))
         },
+        removeFromCart: (state, action) => {
+
+        },
         getTotalAmount: (state, action) => {
             let {total, count} = state.items.reduce(
                 // section to how calc
@@ -72,7 +75,8 @@ export const getCartCount = state => state.cart.count
 
 export const {
     addToCart,
-    getTotalAmount
+    getTotalAmount,
+    removeFromCart,
 } = cartSlice.actions
 
 export default cartSlice.reducer

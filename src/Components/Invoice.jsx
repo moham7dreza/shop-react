@@ -1,11 +1,13 @@
-import {addToCart, getCartCount, getCartItems, getCartTotalAmount, getTotalAmount} from "../slices/cartSlice.js";
+import {addToCart, getCartCount, getCartTotalAmount, getTotalAmount, removeFromCart} from "../slices/cartSlice.js";
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
 import CustomNumeralNumericFormat from "../Helpers/Price.jsx";
+import {Link} from "react-router-dom";
 
 export const Invoice = () => {
 
-    const cartItems = useSelector(getCartItems)
+    const cart = useSelector(state => state.cart)
+    const cartItems = cart.items;
     // console.log(cartItems)
 
     const cartCount = useSelector(getCartCount)
@@ -15,10 +17,14 @@ export const Invoice = () => {
 
     useEffect(() => {
         dispatch(getTotalAmount())
-    }, [cartItems, dispatch]);
+    }, [cart, dispatch]);
 
     const handleAddToCart = (product) => {
         dispatch(addToCart(product))
+    }
+
+    const handleRemoveFromCart = (product) => {
+        dispatch(removeFromCart(product))
     }
 
     return (
@@ -126,15 +132,22 @@ export const Invoice = () => {
                                     cartItems?.map((item, index) => (
                                         <section key={index}>
                                             <div className="grid grid-cols-3 sm:grid-cols-5 gap-2">
-                                                <div className="col-span-full sm:col-span-2">
+                                                <Link to={`/items/${item.id}`} className="col-span-full sm:col-span-2">
                                                     <h5 className="sm:hidden text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">Item</h5>
                                                     <p className="font-medium text-gray-800 dark:text-neutral-200">
                                                         {item.name}
                                                     </p>
-                                                </div>
+                                                </Link>
                                                 <div>
                                                     <h5 className="sm:hidden text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">count</h5>
-                                                    <p className="text-gray-800 dark:text-neutral-200">{item.count}</p>
+                                                    <p className="text-gray-800 dark:text-neutral-200">
+                                                        <input type='number' inputMode='numeric' id='item-count'
+                                                               name='item-count' min='1' step='1'
+                                                               className='text-gray-900 w-20'
+                                                               value={item.count}
+                                                               onChange={(e) => handleAddToCart(e, item)}
+                                                        />
+                                                    </p>
                                                 </div>
                                                 <div>
                                                     <h5 className="sm:hidden text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">Rate</h5>
@@ -143,9 +156,19 @@ export const Invoice = () => {
                                                 <div>
                                                     <h5 className="sm:hidden text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">Point</h5>
                                                     <p className="sm:text-end text-gray-800 dark:text-neutral-200">
-                                                        <CustomNumeralNumericFormat value={item.points}
-                                                                                    thousandSeparator=","/>
+                                                        <CustomNumeralNumericFormat value={item.points * item.count}
+                                                                                    thousandSeparator=","
+                                                                                    prefix={'قیمت : '}
+                                                                                    suffix={' تومان '}/>
                                                     </p>
+                                                </div>
+                                                <div>
+                                                    <h5 className="sm:hidden text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">Remove
+                                                        from cart</h5>
+                                                    <button className="sm:text-end text-gray-800 dark:text-neutral-200"
+                                                            onClick={() => handleRemoveFromCart(item)}>
+                                                        😕
+                                                    </button>
                                                 </div>
                                             </div>
 
@@ -171,7 +194,7 @@ export const Invoice = () => {
                                     <dl className="grid sm:grid-cols-5 gap-x-3">
                                         <dt className="col-span-3 font-semibold text-gray-800 dark:text-neutral-200">Total:</dt>
                                         <dd className="col-span-2 text-gray-500 dark:text-neutral-500">
-                                            <CustomNumeralNumericFormat value={cartTotalAmount}
+                                            <CustomNumeralNumericFormat value={cartTotalAmount} suffix=' تومان '
                                                                         thousandSeparator=","/>
                                         </dd>
                                     </dl>
@@ -217,8 +240,8 @@ export const Invoice = () => {
 
                     {/*<!-- Buttons -->*/}
                     <div className="mt-6 flex justify-end gap-x-3">
-                        <a className="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:bg-gray-50 dark:bg-transparent dark:border-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800"
-                           href="#">
+                        <Link to={'/'}
+                              className="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:bg-gray-50 dark:bg-transparent dark:border-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800">
                             <svg className="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                  viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"
                                  strokeLinecap="round" strokeLinejoin="round">
@@ -227,7 +250,7 @@ export const Invoice = () => {
                                 <line x1="12" x2="12" y1="15" y2="3"/>
                             </svg>
                             Invoice PDF
-                        </a>
+                        </Link>
                         <a className="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none"
                            href="#">
                             <svg className="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24"

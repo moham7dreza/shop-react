@@ -1,4 +1,10 @@
+import {Link} from "react-router-dom";
+import {useSelector} from "react-redux";
+import {getCartCount} from "../slices/cartSlice.js";
+
 export const Navbar = () => {
+
+    const cartItemsCount = useSelector(getCartCount)
     return (
         <>
             {/*<!-- ========== HEADER ========== */}
@@ -7,8 +13,9 @@ export const Navbar = () => {
                     className="relative max-w-7xl w-full flex flex-wrap lg:grid lg:grid-cols-12 basis-full items-center px-4 md:px-6 lg:px-8 mx-auto">
                     <div className="lg:col-span-3 flex items-center">
                         {/*<!-- Logo */}
-                        <a className="flex-none rounded-xl text-xl inline-block font-semibold focus:outline-none focus:opacity-80"
-                           href="../templates/creative-agency/index.html" aria-label="Preline">
+                        <Link to={'/'}
+                              className="flex-none rounded-xl text-xl inline-block font-semibold focus:outline-none focus:opacity-80"
+                              aria-label="Preline">
                             <svg className="w-28 h-auto" width="116" height="32" viewBox="0 0 116 32" fill="none"
                                  xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -23,7 +30,7 @@ export const Navbar = () => {
                                 <circle cx="13" cy="16.5214" r="5" className="fill-black dark:fill-white"
                                         fill="currentColor"/>
                             </svg>
-                        </a>
+                        </Link>
                         {/*<!-- End Logo */}
 
                         <div className="ms-1 sm:ms-2">
@@ -558,10 +565,11 @@ export const Navbar = () => {
                                 className="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium text-nowrap rounded-xl bg-white border border-gray-200 text-black hover:bg-gray-100 focus:outline-none focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:hover:bg-white/10 dark:text-white dark:hover:text-white dark:focus:text-white">
                             Sign in
                         </button>
-                        <button type="button"
+                        <Link to={'/invoice'}
                                 className="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium text-nowrap rounded-xl border border-transparent bg-lime-400 text-black hover:bg-lime-500 focus:outline-none focus:bg-lime-500 transition disabled:opacity-50 disabled:pointer-events-none">
-                            Hire us
-                        </button>
+                            <span className='bg-red-500 p-2 rounded-full'>{cartItemsCount}</span>
+                            Cart
+                        </Link>
 
                         <div className="lg:hidden">
                             <button type="button"
