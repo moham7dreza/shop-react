@@ -26,7 +26,10 @@ export const Show = () => {
         navigate('/invoice')
     }
 
-    const increaseCount = () => setCount(count + 1)
+    const increaseCount = () => {
+        setCount(count + 1)
+    }
+
 
     return (<>
         {item ? (<section>

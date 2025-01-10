@@ -1,4 +1,11 @@
-import {addToCart, getCartCount, getCartTotalAmount, getTotalAmount, removeFromCart} from "../slices/cartSlice.js";
+import {
+    addToCart,
+    decreaseCount,
+    getCartCount,
+    getCartTotalAmount,
+    getTotalAmount,
+    removeFromCart
+} from "../slices/cartSlice.js";
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
 import CustomNumeralNumericFormat from "../Helpers/Price.jsx";
@@ -25,6 +32,18 @@ export const Invoice = () => {
 
     const handleRemoveFromCart = (product) => {
         dispatch(removeFromCart(product))
+    }
+
+    const handleDecreaseCart = (item) => {
+        dispatch(decreaseCount(item))
+    }
+
+    const handleItemCount = (e, item) => {
+        if (e.target.value > item.count) {
+            handleAddToCart(item)
+        } else {
+            handleDecreaseCart(item)
+        }
     }
 
     return (
@@ -142,10 +161,10 @@ export const Invoice = () => {
                                                     <h5 className="sm:hidden text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">count</h5>
                                                     <p className="text-gray-800 dark:text-neutral-200">
                                                         <input type='number' inputMode='numeric' id='item-count'
-                                                               name='item-count' min='1' step='1'
+                                                               name='item-count' min='0' step='1'
                                                                className='text-gray-900 w-20'
                                                                value={item.count}
-                                                               onChange={(e) => handleAddToCart(e, item)}
+                                                               onChange={(e) => handleItemCount(e, item)}
                                                         />
                                                     </p>
                                                 </div>

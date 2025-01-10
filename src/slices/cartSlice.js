@@ -19,7 +19,7 @@ export const cartSlice = createSlice({
             if (index >= 0) {
                 state.items[index] = {
                     ...state.items[index],
-                    count: state.items[index].count++
+                    count: state.items[index].count += 1
                 }
                 toast.info('product count increased')
             } else {
@@ -34,8 +34,25 @@ export const cartSlice = createSlice({
 
             localStorage.setItem('cartItems', JSON.stringify(state.items))
         },
-        removeFromCart: (state, action) => {
+        decreaseCount: (state, action) => {
+            const index = state.items.findIndex(item => item.id === action.payload.id)
 
+            const count = state.items[index].count
+
+            if (count > 1) {
+                state.items[index].count--
+                toast.info('product count decreased')
+            } else if (count === 1) {
+                state.items = state.items.filter(item => item.id !== action.payload.id)
+                toast.error('product removed from cart')
+            }
+
+            localStorage.setItem('cartItems', JSON.stringify(state.items))
+        },
+        removeFromCart: (state, action) => {
+            state.items = state.items.filter(item => item.id !== action.payload.id)
+            toast.error('product removed from cart')
+            localStorage.setItem('cartItems', JSON.stringify(state.items))
         },
         getTotalAmount: (state, action) => {
             let {total, count} = state.items.reduce(
@@ -76,6 +93,7 @@ export const getCartCount = state => state.cart.count
 export const {
     addToCart,
     getTotalAmount,
+    decreaseCount,
     removeFromCart,
 } = cartSlice.actions
 
