@@ -50,5 +50,7 @@ export const productSlice = createSlice({
 })
 
 export const selectProduct = (state, id) => state.products.items.find(item => item.id === Number(id))
+export const selectProducts = (state) => state.products.items
+export const selectProductStatus = (state) => state.products.status
 
 export default productSlice.reducer

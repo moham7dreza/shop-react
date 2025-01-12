@@ -4,7 +4,7 @@ import {selectItems} from "../../../Features/Item/item.slice.js";
 import {useGetProductsQuery} from "../../../Features/Api/productApi.js";
 import {Spinner} from "../../Partials/Spinner.jsx";
 
-export const SwiperList = () => {
+export const SwiperList = ({items, status}) => {
     // const items = useSelector(selectItems)
     //
     // const sortedItems = items.slice().sort((a, b) => b.created_at.localeCompare(a.created_at))
@@ -12,7 +12,7 @@ export const SwiperList = () => {
     // const {items2, status} = useSelector(state => state.products)
     // console.log(status)
     // console.log(items)
-    const {data: items} = useGetProductsQuery(undefined, undefined)
+    // const {data: items} = useGetProductsQuery(undefined, undefined)
     // console.log(items2)
     return (
         <>
