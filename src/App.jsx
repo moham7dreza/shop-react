@@ -35,16 +35,17 @@ const App = () => {
     //     }
     // };
 
-    const items = useSelector(selectProducts)
-    const status = useSelector(selectProductStatus)
+    // const items = useSelector(selectProducts)
+    // const status = useSelector(selectProductStatus)
     // console.log(items)
-    const sortedItems = items.slice().sort((a, b) => b.created_at.localeCompare(a.created_at))
+    // const sortedItems = items.slice().sort((a, b) => b.created_at.localeCompare(a.created_at))
     // console.log(sortedItems)
+
     return (
         <>
             <Master>
 
-                <PaginatedItems perPage={8} products={sortedItems} status={status} />
+                <PaginatedItems perPage={8}/>
             </Master>
             {/*<Hero/>*/}
             {/*{renderContent(bannerStatus, bannerError, Masonry)}*/}

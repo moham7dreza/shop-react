@@ -17,10 +17,21 @@ export const productApi = createApi({
                 'products',
                 ...result.map(({ id }) => ({ type: 'products', id })),
             ],
+        }),
+        getProduct: builder.query({
+            query: (id) => `/items/${id}`,
+            transformResponse: (response) => response.data,
+            providesTags: (item, error, arg) => [
+                {
+                    type: "products",
+                    id: arg,
+                }
+            ]
         })
     })
 })
 
 export const {
+    useGetProductQuery,
     useGetProductsQuery,
 } = productApi

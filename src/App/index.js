@@ -24,5 +24,6 @@ export const store = configureStore({
 })
 
 store.dispatch(populateCartItems())
-store.dispatch(fetchProducts())
+// store.dispatch(fetchProducts())
+store.dispatch(productApi.endpoints.getProducts.initiate())
 store.dispatch(getTotalAmount())

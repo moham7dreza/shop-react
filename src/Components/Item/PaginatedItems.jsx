@@ -1,8 +1,22 @@
 import {useState} from "react";
 import {SwiperList as ItemSwiperList} from "./Carousels/SwiperList.jsx";
 import ReactPaginate from "react-paginate";
+import {useGetProductsQuery} from "../../Features/Api/productApi.js";
 
-export const PaginatedItems = ({perPage, products, status}) => {
+export const PaginatedItems = ({perPage}) => {
+
+    const {
+        data: products = [],
+        isLoading,
+        isSuccess,
+        isError,
+    } = useGetProductsQuery(undefined)
+
+    let status
+    if (isLoading) status = 'loading'
+    else if (isSuccess) status = 'success'
+    else if (isError) status = 'error'
+
     const [itemOffset, setItemOffset] = useState(0)
 
     const endOffset = itemOffset + perPage

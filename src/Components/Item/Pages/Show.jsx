@@ -5,6 +5,7 @@ import {selectProduct} from "../../../slices/productSlice.js";
 import {Spinner} from "../../Partials/Spinner.jsx";
 import {useState} from "react";
 import {addToCart} from "../../../slices/cartSlice.js";
+import {useGetProductQuery} from "../../../Features/Api/productApi.js";
 
 export const Show = () => {
     const {id} = useParams()
@@ -12,12 +13,18 @@ export const Show = () => {
     const navigate = useNavigate()
 
     // const item = useSelector(state => selectItem(state, id))
-    const item = useSelector(state => selectProduct(state, id))
+    // const item = useSelector(state => selectProduct(state, id))
     // console.log(item)
     // if (!item) {
     //     return <E404/>
     // }
 
+    const {
+        data: item,
+        isSuccess,
+        error
+    } = useGetProductQuery(id)
+    // console.log(error)
     const [count, setCount] = useState(1)
 
     const handleAddToCart = (item) => {
@@ -32,7 +39,7 @@ export const Show = () => {
 
 
     return (<>
-        {item ? (<section>
+        {isSuccess ? (<section>
             {/*<!-- Blog Article -->*/}
             <div className="max-w-[85rem] px-4 sm:px-6 lg:px-8 mx-auto">
                 <div className="grid lg:grid-cols-3 gap-y-8 lg:gap-y-0 lg:gap-x-6">

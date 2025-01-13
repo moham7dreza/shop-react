@@ -3,6 +3,7 @@ import {useSelector} from "react-redux";
 import {selectItems} from "../../../Features/Item/item.slice.js";
 import {useGetProductsQuery} from "../../../Features/Api/productApi.js";
 import {Spinner} from "../../Partials/Spinner.jsx";
+import {E404} from "../../Error/E404.jsx";
 
 export const SwiperList = ({items, status}) => {
     // const items = useSelector(selectItems)
@@ -17,7 +18,7 @@ export const SwiperList = ({items, status}) => {
     return (
         <>
             {
-                items ?
+                status === 'success' ?
                     (
                         <section>
                             {/*<!-- Card Blog -->*/}
@@ -40,7 +41,10 @@ export const SwiperList = ({items, status}) => {
                             </div>
                             {/*<!-- End Card Blog -->*/}
                         </section>
-                    ) : <Spinner/>
+                    ) : status === 'loading' ?
+                        (
+                            <Spinner/>
+                        ) : <E404/>
             }
         </>
     )
