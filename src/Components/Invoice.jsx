@@ -1,7 +1,7 @@
 import {
     addToCart,
     decreaseCount,
-    getCartCount,
+    getCartCount, getCartItems,
     getCartTotalAmount,
     getTotalAmount,
     removeFromCart
@@ -13,8 +13,10 @@ import {Link} from "react-router-dom";
 
 export const Invoice = () => {
 
-    const cart = useSelector(state => state.cart)
-    const cartItems = cart.items;
+    const cartItems = useSelector(getCartItems)
+
+    // const cart = useSelector(state => state.cart)
+    // const cartItems = cart.items;
     // console.log(cartItems)
 
     const cartCount = useSelector(getCartCount)
@@ -24,7 +26,7 @@ export const Invoice = () => {
 
     useEffect(() => {
         dispatch(getTotalAmount())
-    }, [cart, dispatch]);
+    }, [cartItems, dispatch]);
 
     const handleAddToCart = (product) => {
         dispatch(addToCart(product))

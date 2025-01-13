@@ -5,7 +5,7 @@ import bannerReducer from "../Features/Banner/banner.slice.js"
 import categoryReducer from "../Features/Item/category.slice.js"
 import shopReducer from "../Features/Shop/shop.slice.js"
 import productReducer, {fetchProducts} from "../slices/productSlice.js"
-import cartReducer, {getTotalAmount} from "../slices/cartSlice.js"
+import cartReducer, {getTotalAmount, populateCartItems} from "../slices/cartSlice.js"
 import {productApi} from "../Features/Api/productApi.js";
 
 export const store = configureStore({
@@ -23,5 +23,6 @@ export const store = configureStore({
         getDefaultMiddleware().concat(productApi.middleware)
 })
 
+store.dispatch(populateCartItems())
 store.dispatch(fetchProducts())
 store.dispatch(getTotalAmount())

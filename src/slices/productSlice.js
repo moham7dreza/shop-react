@@ -36,6 +36,19 @@ export const productSlice = createSlice({
         status: 'idle',
         error: null,
     },
+    // extraReducers: {
+    //     [fetchProducts.pending]: (state, action) => {
+    //         state.status = 'pending'
+    //     },
+    //     [fetchProducts.fulfilled]: (state, action) => {
+    //         state.status = 'completed'
+    //         state.items = action.payload.data
+    //     },
+    //     [fetchProducts.rejected]: (state, action) => {
+    //         state.status = 'failed'
+    //         state.error = action.error.message
+    //     },
+    // }
     extraReducers: builder => {
         builder.addCase(fetchProducts.pending, (state, action) => {
             state.status = 'pending'

@@ -1,10 +1,12 @@
 import {Link} from "react-router-dom";
 import {useSelector} from "react-redux";
-import {getCartCount} from "../slices/cartSlice.js";
+import {getCartCount, getCartItems} from "../slices/cartSlice.js";
 
 export const Navbar = () => {
 
-    const cartItemsCount = useSelector(getCartCount)
+    // const cartItemsCount = useSelector(getCartCount)
+    const cartItems = useSelector(getCartItems)
+    const cartItemsCount = cartItems.length
     return (
         <>
             {/*<!-- ========== HEADER ========== */}
