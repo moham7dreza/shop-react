@@ -5,41 +5,7 @@ import ReactPaginate from "react-paginate";
 import {useSelector} from "react-redux";
 import {selectItems, selectItemStatus} from "./Features/Item/item.slice.js";
 import {selectProduct, selectProducts, selectProductStatus} from "./slices/productSlice.js";
-
-const PaginatedProducts = ({perPage, products, status}) => {
-    const [itemOffset, setItemOffset] = useState(0)
-
-    const endOffset = itemOffset + perPage
-
-    const currentPageProducts = products.slice(itemOffset, endOffset)
-
-    const pageCount = Math.ceil(products.length / perPage)
-
-    const handlePageClick = (e) => {
-        const newOffset = e.selected * perPage
-        setItemOffset(newOffset)
-    }
-
-    return (
-        <>
-            <ItemSwiperList items={currentPageProducts} status={status}/>
-
-            <ReactPaginate
-                containerClassName="flex justify-center items-center mt-8 mb-4"
-                pageClassName="block text-white border border-solid border-lightGray w-10 h-10 flex items-center justify-center rounded-md mr-2"
-                activeClassName="bg-palette-primary text-palette-light hover:bg-palette-dark"
-                breakLabel="..."
-                onPageChange={handlePageClick}
-                pageRangeDisplayed={5}
-                pageCount={pageCount}
-                previousLabel={null}
-                nextLabel={null}
-                renderOnZeroPageCount={null}
-            />
-
-        </>
-    )
-}
+import {PaginatedItems} from "./Components/Item/PaginatedItems.jsx";
 
 const App = () => {
     // const dispatch = useDispatch();
@@ -78,7 +44,7 @@ const App = () => {
         <>
             <Master>
 
-                <PaginatedProducts perPage={8} products={sortedItems} status={status} />
+                <PaginatedItems perPage={8} products={sortedItems} status={status} />
             </Master>
             {/*<Hero/>*/}
             {/*{renderContent(bannerStatus, bannerError, Masonry)}*/}
